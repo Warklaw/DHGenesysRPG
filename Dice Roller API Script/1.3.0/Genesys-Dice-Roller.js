@@ -83,6 +83,7 @@
  * default:
  * Description: Generates a blank character sheet and automatically makes it viewable and editable by the person calling the script.
  * Command: !charsheet
+ * test change
  */
 
 /* Define functions that may not always exist */
@@ -1241,7 +1242,7 @@ eote.defaults = {
     character: {
         attributes: [
             /* Don't need to update characterID
-             * 
+             *
              *{
              name : "characterID",
              current : "UPDATES TO CURRENT ID",
@@ -1526,8 +1527,8 @@ eote.updateAddAttribute = function (charactersObj, updateAddAttributesObj) { // 
     });
 };
 
-/* DICE PROCESS 
- * 
+/* DICE PROCESS
+ *
  * Matches the different regex commands and runs that dice processing step
  * The order of step should not be change or dice could be incorrectly rolled.
  * example: All dice needs to be 'upgraded" before it can be 'downgraded'
@@ -1687,7 +1688,7 @@ eote.process.setup = function (cmd, playerName, playerID) {
     if (labelMatch) {
         diceObj = eote.process.label(labelMatch, diceObj);
     }
-    /* Dice rolls 
+    /* Dice rolls
      * Description: Create dice pool before running any custom roll
      * script commands that may need dice evaluated.
      * --------------------------------------------------------------*/
@@ -1746,7 +1747,7 @@ eote.process.setup = function (cmd, playerName, playerID) {
         diceObj = eote.process.downgrade(downgradeMatch, diceObj);
     }
 
-    /* Roll dice and update success / fail 
+    /* Roll dice and update success / fail
      * ------------------------------------------------------------- */
     diceObj = eote.process.rollDice(diceObj);
 
@@ -1793,13 +1794,13 @@ eote.process.setup = function (cmd, playerName, playerID) {
         return false;
     }
 
-    /* Display dice output in chat window 
+    /* Display dice output in chat window
      * ------------------------------------------------------------- */
     eote.process.diceOutput(diceObj, playerName, playerID);
 };
 
 /* DICE PROCESS FUNCTION
- * 
+ *
  * ---------------------------------------------------------------- */
 
 
@@ -2088,7 +2089,7 @@ eote.process.destiny = function (cmd, diceObj) {
             darkSide = darkSide + diceObj.totals.dark;
             lightSide = lightSide + diceObj.totals.light;
 
-            //Register 
+            //Register
             if (eote.defaults.destinyListeners.indexOf(diceObj.vars.characterID) == -1) {
                 eote.defaults.destinyListeners.push(diceObj.vars.characterID);
             }
@@ -2363,7 +2364,7 @@ eote.process.initiative = function (cmd, diceObj) {
 eote.process.crit = function (cmd, diceObj) {
 
     /* Crit
-     * default: 
+     * default:
      * Description: Rolls critical injury table
      * Command: !eed crit(roll) crit(roll|#) crit(heal|#)
      * ---------------------------------------------------------------- */
@@ -2852,7 +2853,7 @@ eote.process.generateRowID = function () {
 eote.process.gmdice = function (cmd) {
 
     /* gmdice
-     * default: 
+     * default:
      * Description: Update CMD string to include -GameMasterCharacterSheet dice
      * Command: (gmdice)
      * ---------------------------------------------------------------- */
@@ -2882,7 +2883,7 @@ eote.process.gmdice = function (cmd) {
 eote.process.encum = function (cmd, diceObj) {
 
     /* Encumberment
-     * default: 
+     * default:
      * Description: If the current encum is great than threshold add 1 setback per unit over current encum
      * Command: !eed encum(encum_current|encum_threshold)
      * ---------------------------------------------------------------- */
@@ -2915,7 +2916,7 @@ eote.process.encum = function (cmd, diceObj) {
 eote.process.skill = function (cmd, diceObj) {
 
     /* Skill
-     * default: 
+     * default:
      * Description: create the ability and proficiency dice for a skill check
      * Command: !eed skill(char_value|skill_value|[NPC minion group size]|[Is minion skill])
      * ---------------------------------------------------------------- */
@@ -3004,7 +3005,7 @@ eote.process.opposed = function (cmd, diceObj) {
 eote.process.setDice = function (cmd, diceObj) {
 
     /* setDice
-     * default: 
+     * default:
      * Description: Loop thru the dice and adds or subtracts them from the dice object
      * Command: !eed g# y# b# blk# r# p# w# or g#+# or g#-#
      * ---------------------------------------------------------------- */
@@ -3119,7 +3120,7 @@ eote.process.checkNegative = function (diceObj) {
 eote.process.upgrade = function (cmd, diceObj) {
 
     /* Upgrade
-     * default: 
+     * default:
      * Description: upgrades ability and difficulty dice
      * Command: !eed upgrade(ability|#) or upgrade(difficulty|#)
      * ---------------------------------------------------------------- */
@@ -3181,7 +3182,7 @@ eote.process.upgrade = function (cmd, diceObj) {
 eote.process.downgrade = function (cmd, diceObj) {
 
     /* Downgrade
-     * default: 
+     * default:
      * Description: downgrades proficiency and challenge dice
      * Command: !eed downgrade(proficiency|#) or downgrade(challenge|#)
      * ---------------------------------------------------------------- */
@@ -3244,7 +3245,7 @@ eote.process.math = function (expr) {
 
     /* Math
      * Returns: Number
-     * Description: Evaluates a mathematical expression (as a string) and return the result 
+     * Description: Evaluates a mathematical expression (as a string) and return the result
      * ---------------------------------------------------------------- */
 
     var chars = expr.split("");
@@ -3362,7 +3363,7 @@ eote.process.rollDice = function (diceObj) {
         diceObj.textLog.Boost = results.diceTextLog;
         diceObj.totals = eote.process.addDiceValues(diceObj.totals, results);
     }
-    //Green "Ability" die (d8) 
+    //Green "Ability" die (d8)
     if (diceObj.count.ability > 0) {
         results = eote.roll.ability(diceObj.count.ability);
         diceObj.graphicsLog.Ability = results.diceGraphicsLog;
