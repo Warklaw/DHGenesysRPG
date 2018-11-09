@@ -4105,7 +4105,7 @@ eote.roll = {
                     diceResult.diceGraphicsLog = diceResult.diceGraphicsLog + s1 + eote.defaults.graphics.CHALLENGE.BLANK + s2 + "Challenge Blank" + s3 + eote.defaults.globalVars.diceGraphicsChatSize + s4 + eote.defaults.globalVars.diceGraphicsChatSize + s5;
                     break;
                 case 2:
-                    diceResult.diceTextLog = diceResult.diceTextLog + "(Despair)";
+                    diceResult.diceTextLog = diceResult.diceTextLog + "(Despair(+Failure))";
                     diceResult.diceGraphicsLog = diceResult.diceGraphicsLog + s1 + eote.defaults.graphics.CHALLENGE.DESPAIR + s2 + "Challenge Despair" + s3 + eote.defaults.globalVars.diceGraphicsChatSize + s4 + eote.defaults.globalVars.diceGraphicsChatSize + s5;
                     diceResult.despair = diceResult.despair + 1;
                     diceResult.failure = diceResult.failure + 1;
