@@ -1307,7 +1307,7 @@ eote.defaults = {
         },
         SYMBOLS: {
             A: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Symbols/Advantage.png",
-            S: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Symbols/Advantage.png",
+            S: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Symbols/success.png",
             T: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Symbols/Threat_bw.png",
             F: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Symbols/Fail_bw.png",
             TRIUMPH: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Symbols/Triumph.png",
