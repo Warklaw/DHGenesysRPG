@@ -1268,7 +1268,7 @@ eote.defaults = {
             SS: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Ability/ability-2.png"
         },
         BOOST: {
-            BLANK: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Boost/boost-1.png",
+            BLANK: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Boost/boost-5.png",
             A: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Boost/boost-2.png",
             AA: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Boost/boost-3.png",
             S: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Boost/boost-1.png",
