@@ -1,7 +1,8 @@
 ﻿/*
- Current Version: 1.3.0
- Last updated: 01.10.2018
+ Current Version: 1.4.0
+ Last updated: 11.09.2018
  Character Sheet and Script created by: GM Knowledge Rhino
+ Dice Images updated by: Warklaw
 
  Known Issues:
  * Dice Suggestions do not fully match up to Genesys.
@@ -1259,58 +1260,58 @@ eote.defaults = {
             LARGE: 40
         },
         ABILITY: {
-            BLANK: "https://i.imgur.com/NhSglh7.png",
-            A: "https://i.imgur.com/mHG4eh2.png",
-            AA: "https://i.imgur.com/c4Zbeod.png",
-            S: "https://i.imgur.com/wSsxsjb.png",
-            SA: "https://i.imgur.com/v4cUwLN.png",
-            SS: "https://i.imgur.com/SiEZtMf.png"
+            BLANK: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Ability/ability-6.png",
+            A: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Ability/ability-3.png",
+            AA: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Ability/ability-5.png",
+            S: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Ability/ability-1.png",
+            SA: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Ability/ability-4.png",
+            SS: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Ability/ability-2.png"
         },
         BOOST: {
-            BLANK: "https://i.imgur.com/gzPXiBK.png",
-            A: "https://i.imgur.com/g4zZseK.png",
-            AA: "https://i.imgur.com/YOTIuFZ.png",
-            S: "https://i.imgur.com/NjGJpYK.png",
-            SA: "https://i.imgur.com/dhStIX6.png"
+            BLANK: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Boost/boost-5.png",
+            A: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Boost/boost-2.png",
+            AA: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Boost/boost-3.png",
+            S: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Boost/boost-1.png",
+            SA: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Boost/boost-4.png"
         },
         CHALLENGE: {
-            BLANK: "https://i.imgur.com/56lp8IN.png",
-            F: "https://i.imgur.com/itob7iS.png",
-            FF: "https://i.imgur.com/TZCVOU4.png",
-            FT: "https://i.imgur.com/3aEjzhC.png",
-            T: "https://i.imgur.com/buFGnLb.png",
-            TT: "https://i.imgur.com/zhSCsAn.png",
-            DESPAIR: "https://i.imgur.com/N7ywBJp.png"
+            BLANK: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Challenge/challenge-7.png",
+            F: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Challenge/challenge-1.png",
+            FF: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Challenge/challenge-2.png",
+            FT: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Challenge/challenge-4.png",
+            T: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Challenge/challenge-3.png",
+            TT: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Challenge/challenge-5.png",
+            DESPAIR: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Challenge/challenge-6.png"
         },
         DIFFICULTY: {
-            BLANK: "https://i.imgur.com/SmEKzyC.png",
-            F: "https://i.imgur.com/thdeWgR.png",
-            FF: "https://i.imgur.com/GuWpUnC.png",
-            FT: "https://i.imgur.com/IIsVCKN.png",
-            T: "https://i.imgur.com/tYU5juG.png",
-            TT: "https://i.imgur.com/CmZJ16T.png"
+            BLANK: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Difficulty/difficulty-6.png",
+            F: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Difficulty/difficulty-1.png",
+            FF: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Difficulty/difficulty-2.png",
+            FT: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Difficulty/difficulty-5.png",
+            T: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Difficulty/difficulty-3.png",
+            TT: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Difficulty/difficulty-4.png"
         },
         PROFICIENCY: {
-            BLANK: "https://i.imgur.com/Cem6BPL.png",
-            A: "https://i.imgur.com/XCqPA0s.png",
-            S: "https://i.imgur.com/VtnKaoM.png",
-            SA: "https://i.imgur.com/v4cUwLN.png",
-            SS: "https://i.imgur.com/VpITyqd.png",
-            AA: "https://i.imgur.com/KRYnzZ1.png",
-            TRIUMPH: "https://i.imgur.com/kU33Rfs.png"
+            BLANK: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Proficiency/proficiency-7.png",
+            A: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Proficiency/proficiency-3.png",
+            S: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Proficiency/proficiency-1.png",
+            SA: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Proficiency/proficiency-4.png",
+            SS: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Proficiency/proficiency-2.png",
+            AA: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Proficiency/proficiency-5.png",
+            TRIUMPH: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Proficiency/proficiency-6.png"
         },
         SETBACK: {
-            BLANK: "https://i.imgur.com/XXG63Z9.png",
-            F: "https://i.imgur.com/motDdx2.png",
-            T: "https://i.imgur.com/rdXo6xd.png"
+            BLANK: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Setback/setback-3.png",
+            F: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Setback/setback-1.png",
+            T: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Setback/setback-2.png"
         },
         SYMBOLS: {
-            A: "https://i.imgur.com/O1dDNFm.png",
-            S: "https://i.imgur.com/eUWFvS1.png",
-            T: "https://i.imgur.com/KaNTWxn.png",
-            F: "https://i.imgur.com/r7Vyuvx.png",
-            TRIUMPH: "https://i.imgur.com/HhC1DtU.png",
-            DESPAIR: "https://i.imgur.com/50OmhOU.png"
+            A: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Symbols/Advantage.png",
+            S: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Symbols/Success.png",
+            T: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Symbols/Threat_bw.png",
+            F: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Symbols/Fail_bw.png",
+            TRIUMPH: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Symbols/Triumph.png",
+            DESPAIR: "http://warklaw.fatcow.com/roll20/genesysRPG/Dice/Symbols/Despair_bw.png"
         },
         SymbolicReplacement: {}
     },
@@ -4104,8 +4105,8 @@ eote.roll = {
                     diceResult.diceGraphicsLog = diceResult.diceGraphicsLog + s1 + eote.defaults.graphics.CHALLENGE.BLANK + s2 + "Challenge Blank" + s3 + eote.defaults.globalVars.diceGraphicsChatSize + s4 + eote.defaults.globalVars.diceGraphicsChatSize + s5;
                     break;
                 case 2:
-                    diceResult.diceTextLog = diceResult.diceTextLog + "(Despair)";
-                    diceResult.diceGraphicsLog = diceResult.diceGraphicsLog + s1 + eote.defaults.graphics.CHALLENGE.DESPAIR + s2 + "Challenge Despair" + s3 + eote.defaults.globalVars.diceGraphicsChatSize + s4 + eote.defaults.globalVars.diceGraphicsChatSize + s5;
+                    diceResult.diceTextLog = diceResult.diceTextLog + "(Despair(+Failure))";
+                    diceResult.diceGraphicsLog = diceResult.diceGraphicsLog + s1 + eote.defaults.graphics.CHALLENGE.DESPAIR + s2 + "Challenge Despair(+Failure)" + s3 + eote.defaults.globalVars.diceGraphicsChatSize + s4 + eote.defaults.globalVars.diceGraphicsChatSize + s5;
                     diceResult.despair = diceResult.despair + 1;
                     diceResult.failure = diceResult.failure + 1;
                     break;
