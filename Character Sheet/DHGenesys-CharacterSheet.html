@@ -1,3 +1,5 @@
+<!--Modified by: Warklaw for use with Dark Heresy Genesys mod-->
+
 <!--Is the Sheet for the Player or GM?-->
 <input type="radio" name="attr_gmdicepool" class="sheet-player" value="1" checked="checked" style="display:none">
 <input type="radio" name="attr_gmdicepool" class="sheet-gm" value="2" style="display:none">
@@ -63,7 +65,7 @@
 
 
 <div>
-    <h3 class="sheet-section-header" data-i18n="genesysrpg">Genesys Role Playing Game System - Dark Heresy Mod</></h3>
+    <h3 class="sheet-section-header" data-i18n="dhgenesysrpg">Dark Heresy - Genesys</h3>
     <input style="width: 250px;height: 30px;margin: -44px -20px 0 297px;float:left;" class="sheet-toggle sheet-header-section-toggle" type="checkbox" checked="checked" />
     <div class="sheet-header-section">
         <table>
@@ -195,14 +197,14 @@
                                 <label class="sheet-label-threshold" data-i18n="threshold">Threshold</label>
                                 <label class="sheet-label-current" data-i18n="current">Current</label>
                             </td>
-                            <td rowspan="2">
+                            <td>
                                 <label class="sheet-label-title" data-i18n="defense">Defense</label>
                                 <input name="attr_rangeddefense" type="number" max="4" min="0" value="0" />
                                 <input name="attr_meleedefense" type="number" max="4" min="0" value="0" /><br />
                                 <label class="sheet-label-range" data-i18n="range">Range</label>
                                 <label class="sheet-label-melee" data-i18n="meleeshort">Melee</label>
                             </td>
-                            <td rowspan="2">
+                            <td>
                                 <label class="sheet-label-title" data-i18n="encum">Encum</label>
                                 <input name="attr_encumbrance_max" type="number" min="1" value="1" />
                                 <input name="attr_encumbrancemax" type="hidden" value="@{encumbrance|max}" disabled />
@@ -215,6 +217,10 @@
                             <td colspan="2">
                                 <label class="sheet-label-title" data-i18n="soak">Soak</label>
                                 <input name="attr_soak" type="number" max="49" min="1" value="1" />
+                            </td>
+                            <td colspan="2">
+                                <label class="sheet-label-title" data-i18n="corruption">Corruption</label>
+                                <input name="attr_corruption" type="number" max="49" min="0" value="0" />
                             </td>
                         </tr>
                     </tbody>
@@ -461,7 +467,7 @@
                                     </div><!-- Modifier Help -->
                                 </th>
                             </tr>
-                        </thead>
+                        </thead><!-- Character Skills -->
                         <tbody>
                             <tr data-i18n-list-item="alchemy" class="hide-alchemy hide-skill-row">
                                 <td><label data-i18n="alchemyint">Alchemy (Int)</label> <label class="hideskills"><input type="checkbox" name="attr_hide-alchemy" value="1"/> <span data-i18n="hide">Hide</span></label></td>
@@ -495,7 +501,7 @@
                                         <input type="text" name="attr_diceAstrogation" />
                                     </div>
                                 </td>
-                                <td><button type='roll' name='roll_Alchemy' value='!eed characterID(@{character_id}) label(skill:Astrocartography) @{diceAstrogation} skill(@{rankAstrogation}|@{intellect}|Astrogation) @{dicePool} (gmdice)'></button></td>
+                                <td><button type='roll' name='roll_Astrogation' value='!eed characterID(@{character_id}) label(skill:Astrocartography) @{diceAstrogation} skill(@{rankAstrogation}|@{intellect}|Astrogation) @{dicePool} (gmdice)'></button></td>
                             </tr><!--Astrocartography-->
                             <tr data-i18n-list-item="athletics" class="hide-athletics hide-skill-row">
                                 <td>
@@ -862,7 +868,7 @@
                     <table class="sheet-skills" cellspacing="0" cellpadding="0" border="0" data-i18n-list="knowledge-skills-list">
                         <thead>
                             <tr>
-                                <th data-i18n="magicskills">Magic Skills</th>
+                                <th data-i18n="psychicpowers">Psychic Powers</th>
                                 <th data-i18n="career">Career</th>
                                 <th colspan="2" data-i18n="rank">Rank</th>
                                 <th colspan="2" data-i18n="mods">Mods</th>
@@ -887,6 +893,42 @@
                                 </td>
                                 <td><button type='roll' name='roll_Arcana' value='!eed characterID(@{character_id}) label(skill:Arcana) @{diceArcana} skill(@{rankArcana}|@{intellect}|Arcana) @{dicePool} (gmdice)'></button></td>
                             </tr><!--Arcana-->
+                            <tr data-i18n-list-item="biomancy" class="hide-biomancy hide-skill-row">
+                                <td>
+                                    <label data-i18n="biomancybr">Biomancy (Br)</label> <label class="hideskills"><input type="checkbox" name="attr_hide-biomancy" value="1"/> <span data-i18n="hide">Hide</span></label>
+                                </td>
+                                <td><input name='attr_careerskillBiomancy' type="checkbox" value="1"></td>
+                                <td><input type="number" name="attr_rankBiomancy" max="6" min="0" value="0" /></td>
+                                <td>
+                                    <input class="sheet-yd" type="hidden" name="attr_yBiomancy" value="(((@{brawn} + @{rankBiomancy}) - abs(@{brawn} - @{rankBiomancy})) / 2)" disabled><span></span>
+                                    <input class="sheet-gd" type="hidden" name="attr_gBiomancy" value="((((@{brawn} + @{rankBiomancy}) + abs(@{brawn} - @{rankBiomancy})) / 2) - @{yBiomancy})" disabled><span></span>
+                                </td>
+                                <td>
+                                    <div class="sheet-dice-icon"></div>
+                                    <div class="sheet-dice-input">
+                                        <input type="text" name="attr_diceBiomancy" />
+                                    </div>
+                                </td>
+                                <td><button type='roll' name='roll_Biomancy' value='!eed characterID(@{character_id}) label(skill:Biomancy) @{diceBiomancy} skill(@{rankBiomancy}|@{brawn}|Biomancy) @{dicePool} (gmdice)'></button></td>
+                            </tr><!--Biomancy - Psychic Power - Dark Heresy specific skill-->
+                            <tr data-i18n-list-item="divination" class="hide-divination hide-skill-row">
+                                <td>
+                                    <label data-i18n="divinationcun">Divination (Cun)</label> <label class="hideskills"><input type="checkbox" name="attr_hide-divination" value="1"/> <span data-i18n="hide">Hide</span></label>
+                                </td>
+                                <td><input name='attr_careerskillDivination' type="checkbox" value="1"></td>
+                                <td><input type="number" name="attr_rankDivination" max="6" min="0" value="0" /></td>
+                                <td>
+                                    <input class="sheet-yd" type="hidden" name="attr_yDivination" value="(((@{cunning} + @{rankDivination}) - abs(@{cunning} - @{rankDivination})) / 2)" disabled><span></span>
+                                    <input class="sheet-gd" type="hidden" name="attr_gDivination" value="((((@{cunning} + @{rankDivination}) + abs(@{cunning} - @{rankDivination})) / 2) - @{yDivination})" disabled><span></span>
+                                </td>
+                                <td>
+                                    <div class="sheet-dice-icon"></div>
+                                    <div class="sheet-dice-input">
+                                        <input type="text" name="attr_diceDivination" />
+                                    </div>
+                                </td>
+                                <td><button type='roll' name='roll_Divination' value='!eed characterID(@{character_id}) label(skill:Divination) @{diceDivination} skill(@{rankDivination}|@{cunning}|Divination) @{dicePool} (gmdice)'></button></td>
+                            </tr><!--Divination - Psychic Power - Dark Heresy specific skill-->
                             <tr data-i18n-list-item="divine" class="hide-divine hide-skill-row">
                                 <td>
                                     <label data-i18n="divinewill">Divine (Will)</label> <label class="hideskills"><input type="checkbox" name="attr_hide-divine" value="1"/> <span data-i18n="hide">Hide</span></label>
@@ -923,6 +965,60 @@
                                 </td>
                                 <td><button type='roll' name='roll_Primal' value='!eed characterID(@{character_id}) label(skill:Primal) @{dicePrimal} skill(@{rankPrimal}|@{cunning}|Primal) @{dicePool} (gmdice)'></button></td>
                             </tr><!--Primal-->
+                            <tr data-i18n-list-item="pyromancy" class="hide-pyromancy hide-skill-row">
+                                <td>
+                                    <label data-i18n="pyromancyag">Pyromancy (Ag)</label> <label class="hideskills"><input type="checkbox" name="attr_hide-biomancy" value="1"/> <span data-i18n="hide">Hide</span></label>
+                                </td>
+                                <td><input name='attr_careerskillPyromancy' type="checkbox" value="1"></td>
+                                <td><input type="number" name="attr_rankPyromancy" max="6" min="0" value="0" /></td>
+                                <td>
+                                    <input class="sheet-yd" type="hidden" name="attr_yPyromancy" value="(((@{agility} + @{rankPyromancy}) - abs(@{agility} - @{rankPyromancy})) / 2)" disabled><span></span>
+                                    <input class="sheet-gd" type="hidden" name="attr_gPyromancy" value="((((@{agility} + @{rankPyromancy}) + abs(@{agility} - @{rankPyromancy})) / 2) - @{yPyromancy})" disabled><span></span>
+                                </td>
+                                <td>
+                                    <div class="sheet-dice-icon"></div>
+                                    <div class="sheet-dice-input">
+                                        <input type="text" name="attr_dicePyromancy" />
+                                    </div>
+                                </td>
+                                <td><button type='roll' name='roll_Pyromancy' value='!eed characterID(@{character_id}) label(skill:Pyromancy) @{dicePyromancy} skill(@{rankPyromancy}|@{agility}|Pyromancy) @{dicePool} (gmdice)'></button></td>
+                            </tr><!--Pyromancy - Psychic Power - Dark Heresy specific skill-->
+                            <tr data-i18n-list-item="telekinesis" class="hide-telekinesis hide-skill-row">
+                                <td>
+                                    <label data-i18n="telekinesisint">Telekinesis (Int)</label> <label class="hideskills"><input type="checkbox" name="attr_hide-telekinesis" value="1"/> <span data-i18n="hide">Hide</span></label>
+                                </td>
+                                <td><input name='attr_careerskillTelekinesis' type="checkbox" value="1"></td>
+                                <td><input type="number" name="attr_rankTelekinesis" max="6" min="0" value="0" /></td>
+                                <td>
+                                    <input class="sheet-yd" type="hidden" name="attr_yTelekinesis" value="(((@{intellect} + @{rankTelekinesis}) - abs(@{intellect} - @{rankTelekinesis})) / 2)" disabled><span></span>
+                                    <input class="sheet-gd" type="hidden" name="attr_gTelekinesis" value="((((@{intellect} + @{rankTelekinesis}) + abs(@{intellect} - @{rankTelekinesis})) / 2) - @{yTelekinesis})" disabled><span></span>
+                                </td>
+                                <td>
+                                    <div class="sheet-dice-icon"></div>
+                                    <div class="sheet-dice-input">
+                                        <input type="text" name="attr_diceTelekinesis" />
+                                    </div>
+                                </td>
+                                <td><button type='roll' name='roll_Telekinesis' value='!eed characterID(@{character_id}) label(skill:Telekinesis) @{diceTelekinesis} skill(@{rankTelekinesis}|@{intellect}|Telekinesis) @{dicePool} (gmdice)'></button></td>
+                            </tr><!--Telekinesis - Psychic Power - Dark Heresy specific skill-->
+                            <tr data-i18n-list-item="telepathy" class="hide-telekpathy hide-skill-row">
+                                <td>
+                                    <label data-i18n="telepathypr">Telepathy (Pr)</label> <label class="hideskills"><input type="checkbox" name="attr_hide-telepathy" value="1"/> <span data-i18n="hide">Hide</span></label>
+                                </td>
+                                <td><input name='attr_careerskillTelepathy' type="checkbox" value="1"></td>
+                                <td><input type="number" name="attr_rankTelepathy" max="6" min="0" value="0" /></td>
+                                <td>
+                                    <input class="sheet-yd" type="hidden" name="attr_yTelepathy" value="(((@{presence} + @{rankTelepathy}) - abs(@{presence} - @{rankTelepathy})) / 2)" disabled><span></span>
+                                    <input class="sheet-gd" type="hidden" name="attr_gTelepathy" value="((((@{presence} + @{rankTelepathy}) + abs(@{presence} - @{rankTelepathy})) / 2) - @{yTelepathy})" disabled><span></span>
+                                </td>
+                                <td>
+                                    <div class="sheet-dice-icon"></div>
+                                    <div class="sheet-dice-input">
+                                        <input type="text" name="attr_diceTelepathy" />
+                                    </div>
+                                </td>
+                                <td><button type='roll' name='roll_Telepathy' value='!eed characterID(@{character_id}) label(skill:Telepathy) @{diceTelepathy} skill(@{rankTelepathy}|@{presence}|Telepathy) @{dicePool} (gmdice)'></button></td>
+                            </tr><!--Telepathy - Psychic Power - Dark Heresy specific skill-->
                         </tbody>
                     </table><!--Magic Skills Section-->
                     <table class="sheet-skills" cellspacing="0" cellpadding="0" border="0" data-i18n-list="combat-skills-list">
@@ -1193,6 +1289,42 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr data-i18n-list-item="commonlore" class="hide-commonlore hide-skill-row">
+                                <td>
+                                    <label data-i18n="commonloreint">Common Lore (Int)</label> <label class="hideskills"><input type="checkbox" name="attr_hide-commonlore" value="1"/> <span data-i18n="hide">Hide</span></label>
+                                </td>
+                                <td><input name='attr_careerskillCommonLore' type="checkbox" value="1"></td>
+                                <td><input type="number" name="attr_rankCommonLore" max="6" min="0" value="0" /></td>
+                                <td>
+                                    <input class="sheet-yd" type="hidden" name="attr_yCommonLore" value="(((@{intellect} + @{rankCommonLore}) - abs(@{intellect} - @{rankCommonLore})) / 2)" disabled><span></span>
+                                    <input class="sheet-gd" type="hidden" name="attr_gCommonLore" value="((((@{intellect} + @{rankCommonLore}) + abs(@{intellect} - @{rankCommonLore})) / 2) - @{yCommonLore})" disabled><span></span>
+                                </td>
+                                <td>
+                                    <div class="sheet-dice-icon"></div>
+                                    <div class="sheet-dice-input">
+                                        <input type="text" name="attr_diceCommonLore" />
+                                    </div>
+                                </td>
+                                <td><button type='roll' name='roll_CommonLore' value='!eed characterID(@{character_id}) label(skill:Common Lore) @{diceCommonLore} skill(@{rankCommonLore}|@{intellect}) @{dicePool} (gmdice)'></button></td>
+                            </tr><!--Common Lore - Dark Heresy specific skill-->
+                            <tr data-i18n-list-item="forbiddenlore" class="hide-forbiddenlore hide-skill-row">
+                                <td>
+                                    <label data-i18n="forbiddenloreint">Forebidden Lore (Int)</label> <label class="hideskills"><input type="checkbox" name="attr_hide-forbiddenlore" value="1"/> <span data-i18n="hide">Hide</span></label>
+                                </td>
+                                <td><input name='attr_careerskillForbiddenLore' type="checkbox" value="1"></td>
+                                <td><input type="number" name="attr_rankForbiddenLore" max="6" min="0" value="0" /></td>
+                                <td>
+                                    <input class="sheet-yd" type="hidden" name="attr_yForbiddenLore" value="(((@{intellect} + @{rankForbiddenLore}) - abs(@{intellect} - @{rankForbiddenLore})) / 2)" disabled><span></span>
+                                    <input class="sheet-gd" type="hidden" name="attr_gForbiddenLore" value="((((@{intellect} + @{rankForbiddenLore}) + abs(@{intellect} - @{rankForbiddenLore})) / 2) - @{yForbiddenLore})" disabled><span></span>
+                                </td>
+                                <td>
+                                    <div class="sheet-dice-icon"></div>
+                                    <div class="sheet-dice-input">
+                                        <input type="text" name="attr_diceForbiddenLore" />
+                                    </div>
+                                </td>
+                                <td><button type='roll' name='roll_ForbiddenLore' value='!eed characterID(@{character_id}) label(skill:Forbidden Lore) @{diceForbiddenLore} skill(@{rankForbiddenLore}|@{intellect}) @{dicePool} (gmdice)'></button></td>
+                            </tr><!--Forbidden Lore - Dark Heresy specific skill-->
                             <tr data-i18n-list-item="knowledge" class="hide-knowledge hide-skill-row">
                                 <td>
                                     <label data-i18n="knowledgeint">Knowledge (Int)</label> <label class="hideskills"><input type="checkbox" name="attr_hide-knowledge" value="1"/> <span data-i18n="hide">Hide</span></label>
@@ -1211,6 +1343,24 @@
                                 </td>
                                 <td><button type='roll' name='roll_Knowledge' value='!eed characterID(@{character_id}) label(skill:Knowledge) @{diceKnowledge} skill(@{rankKnowledge}|@{intellect}) @{dicePool} (gmdice)'></button></td>
                             </tr><!--Knowledge-->
+                            <tr data-i18n-list-item="scholasticlore" class="hide-scholasticlore hide-skill-row">
+                                <td>
+                                    <label data-i18n="scholasticloreint">Scholastic Lore (Int)</label> <label class="hideskills"><input type="checkbox" name="attr_hide-scholasticlore" value="1"/> <span data-i18n="hide">Hide</span></label>
+                                </td>
+                                <td><input name='attr_careerskillScholasticLore' type="checkbox" value="1"></td>
+                                <td><input type="number" name="attr_rankScholasticLore" max="6" min="0" value="0" /></td>
+                                <td>
+                                    <input class="sheet-yd" type="hidden" name="attr_yScholasticLore" value="(((@{intellect} + @{rankScholasticLore}) - abs(@{intellect} - @{rankScholasticLore})) / 2)" disabled><span></span>
+                                    <input class="sheet-gd" type="hidden" name="attr_gScholasticLore" value="((((@{intellect} + @{rankScholasticLore}) + abs(@{intellect} - @{rankScholasticLore})) / 2) - @{yScholasticLore})" disabled><span></span>
+                                </td>
+                                <td>
+                                    <div class="sheet-dice-icon"></div>
+                                    <div class="sheet-dice-input">
+                                        <input type="text" name="attr_diceScholasticLore" />
+                                    </div>
+                                </td>
+                                <td><button type='roll' name='roll_ScholasticLore' value='!eed characterID(@{character_id}) label(skill:Scholastic Lore) @{diceScholasticLore} skill(@{rankScholasticLore}|@{intellect}) @{dicePool} (gmdice)'></button></td>
+                            </tr><!--Scholastic Lore - Dark Heresy specific skill-->
                         </tbody>
                     </table><!--Knowledge Skills Section-->
                     <table class="sheet-custome-skills" cellspacing="0" cellpadding="0" border="0">
@@ -1564,9 +1714,14 @@
                                                     <option value="!eed rollPlayer(character:@{name}|skill:willpower,rankVigilance) label(skill:Vigilance) @{FightingDice} @{dicePool} (gmdice)" data-i18n="vigilance">Vigilance</option>
                                                 </optgroup>
                                                 <optgroup label="Magic Skills">
-                                                    <option value="!eed rollPlayer(character:@{name}|skill:intellect,rankArcana) label(skill:Arcana) @{FightingDice} @{dicePool} (gmdice)" data-i18n="Arcana">Arcana</option>
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:intellect,rankArcana) label(skill:Arcana) @{FightingDice} @{dicePool} (gmdice)" data-i18n="arcana">Arcana</option>
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:brawn,rankBiomancy) label(skill:Biomancy) @{FightingDice} @{dicePool} (gmdice)" data-i18n="biomancy">Biomancy</option>
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:cunning,rankDivination) label(skill:Divination) @{FightingDice} @{dicePool} (gmdice)" data-i18n="divination">Divination</option>
                                                     <option value="!eed rollPlayer(character:@{name}|skill:willpower,rankDivine) label(skill:Divine) @{FightingDice} @{dicePool} (gmdice)" data-i18n="divine">Divine</option>
                                                     <option value="!eed rollPlayer(character:@{name}|skill:cunning,rankPrimal) label(skill:Primal) @{FightingDice} @{dicePool} (gmdice)" data-i18n="primal">Primal</option>
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:agility,rankPyromancy) label(skill:Pyromancy) @{FightingDice} @{dicePool} (gmdice)" data-i18n="pyromancy">Pyromancy</option>
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:intellect,rankTelekinesis) label(skill:Telekinesis) @{FightingDice} @{dicePool} (gmdice)" data-i18n="telekinesis">Telekinesis</option>
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:presence,rankTelepathy) label(skill:Telepathy) @{FightingDice} @{dicePool} (gmdice)" data-i18n="telepathy">Telepathy</option>
                                                 </optgroup>
                                                 <optgroup label="Combat Skills">
                                                     <option value="!eed rollPlayer(character:@{name}|encum|skill:brawn,rankBrawl) label(skill:Brawl) @{FightingDice} @{dicePool} (gmdice)" data-i18n="brawl">Brawl</option>
@@ -1586,7 +1741,10 @@
                                                     <option value="!eed rollPlayer(character:@{name}|skill:presence,rankNegotiation) label(skill:Negotiation) @{FightingDice} @{dicePool} (gmdice)" data-i18n="negotiation">Negotiation</option>
                                                 </optgroup>
                                                 <optgroup label="Knowledge Skills">
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:intellect,rankCommonLore) label(skill:Common Lore) @{FightingDice} @{dicePool} (gmdice)" data-i18n="commonlore">Common Lore</option>
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:intellect,rankForbiddenLore) label(skill:Forbidden Lore) @{FightingDice} @{dicePool} (gmdice)" data-i18n="forbiddenlore">Forbidden Lore</option>
                                                     <option value="!eed rollPlayer(character:@{name}|skill:intellect,rankKnowledge) label(skill:Knowledge) @{FightingDice} @{dicePool} (gmdice)" data-i18n="knowledge">Knowledge</option>
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:intellect,rankScholasticLore) label(skill:Scholastic Lore) @{FightingDice} @{dicePool} (gmdice)" data-i18n="scholasticlore">Scholastic Lore</option>
                                                 </optgroup>
                                             </select>
                                         </td><!--Skill List-->
@@ -1690,9 +1848,14 @@
                                     <td>
                                         <select name='attr_MagicSkill'>
                                             <optgroup label="Magic Skills">
-                                                <option value="!eed rollPlayer(character:@{name}|skill:intellect,rankArcana) label(skill:Magic Power|Skill Name: Arcana|Power Name:@{magicpowername})@{dicePool} (gmdice)" data-i18n="Arcana">Arcana</option>
+                                                <option value="!eed rollPlayer(character:@{name}|skill:intellect,rankArcana) label(skill:Magic Power|Skill Name: Arcana|Power Name:@{magicpowername})@{dicePool} (gmdice)" data-i18n="arcana">Arcana</option>
+                                                <option value="!eed rollPlayer(character:@{name}|skill:brawn,rankBiomancy) label(skill:Magic Power|Skill Name: Biomancy|Power Name:@{magicpowername})@{dicePool} (gmdice)" data-i18n="biomancy">Biomancy</option>
+                                                <option value="!eed rollPlayer(character:@{name}|skill:cunning,rankDivination) label(skill:Magic Power|Skill Name: Divination|Power Name:@{magicpowername})@{dicePool} (gmdice)" data-i18n="divination">Divination</option>
                                                 <option value="!eed rollPlayer(character:@{name}|skill:willpower,rankDivine) label(skill:Magic Power|Skill Name: Divine|Power Name:@{magicpowername})@{dicePool} (gmdice)" data-i18n="divine">Divine</option>
                                                 <option value="!eed rollPlayer(character:@{name}|skill:cunning,rankPrimal) label(skill:Magic Power|Skill Name: Primal|Power Name:@{magicpowername})@{dicePool} (gmdice)" data-i18n="primal">Primal</option>
+                                                <option value="!eed rollPlayer(character:@{name}|skill:agility,rankPyromancy) label(skill:Magic Power|Skill Name: Pyromancy|Power Name:@{magicpowername})@{dicePool} (gmdice)" data-i18n="pyromancy">Pyromancy</option>
+                                                <option value="!eed rollPlayer(character:@{name}|skill:intellect,rankTelekinesis) label(skill:Magic Power|Skill Name: Telekinesis|Power Name:@{magicpowername})@{dicePool} (gmdice)" data-i18n="telekinesis">Telekinesis</option>
+                                                <option value="!eed rollPlayer(character:@{name}|skill:presence,rankTelepathy) label(skill:Magic Power|Skill Name: Telepathy|Power Name:@{magicpowername})@{dicePool} (gmdice)" data-i18n="telepathy">Telepathy</option>
                                             </optgroup>
                                         </select>
                                     </td><!--Skill List-->
@@ -2327,9 +2490,14 @@
                                                     <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:willpower,rankVigilance) label(skill:Vigilance|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="vigilance">Vigilance</option>
                                                 </optgroup>
                                                 <optgroup label="Magic Skills">
-                                                    <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:intellect,rankArcana) label(skill:Arcana|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="Arcana">Arcana</option>
+                                                    <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:intellect,rankArcana) label(skill:Arcana|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="arcana">Arcana</option>
+                                                    <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:brawn,rankBiomancy) label(skill:Biomancy|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="biomancy">Biomancy</option>
+                                                    <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:cunning,rankDivination) label(skill:Divination|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="divination">Divination</option>
                                                     <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:willpower,rankDivine) label(skill:Divine|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="divine">Divine</option>
                                                     <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:cunning,rankPrimal) label(skill:Primal|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="primal">Primal</option>
+                                                    <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:agility,rankPyromancy) label(skill:Pyromancy|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="pyromancy">Pyromancy</option>
+                                                    <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:intellect,rankTelekinesis) label(skill:Telekinesis|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="telekinesis">Telekinesis</option>
+                                                    <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:presence,rankTelepathy) label(skill:Telepathy|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="telepathy">Telepathy</option>
                                                 </optgroup>
                                                 <optgroup label="Combat Skills">
                                                     <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|encum|skill:brawn,rankBrawl) label(skill:Brawl|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="brawl">Brawl</option>
@@ -2349,7 +2517,10 @@
                                                     <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:presence,rankNegotiation) label(skill:Negotiation|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="negotiation">Negotiation</option>
                                                 </optgroup>
                                                 <optgroup label="Knowledge Skills">
+                                                    <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:intellect,rankCommonLore) label(skill:Common Lore|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="commonlore">Common Lore</option>
+                                                    <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:intellect,rankForbiddenLore) label(skill:Forbidden Lore|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="forbiddenlore">Forbidden Lore</option>
                                                     <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:intellect,rankKnowledge) label(skill:Knowledge|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="knowledge">Knowledge</option>
+                                                    <option value="!eed rollPlayer(character:@{spaceRoleCharacterName}|skill:intellect,rankScholasticLore) label(skill:Forbidden Lore|Vehicle:@{transport-space-name}|Vehicle:@{transport-space-name}|Role:@{spaceRoleName}) combat(vehicle) @{spaceRoleDice} @{dicePool} (gmdice)" data-i18n="scholasticlore">Scholastic Lore</option>
                                                 </optgroup>
                                             </select>
                                         </td>
@@ -2847,9 +3018,14 @@
                                                     <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:willpower,rankVigilance) label(skill:Vigilance|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="vigilance">Vigilance</option>
                                                 </optgroup>
                                                 <optgroup label="Magic Skills">
-                                                    <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:intellect,rankArcana) label(skill:Arcana|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="Arcana">Arcana</option>
+                                                    <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:intellect,rankArcana) label(skill:Arcana|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="arcana">Arcana</option>
+                                                    <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:brawn,rankBiomancy) label(skill:Biomancy|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="biomancy">Biomancy</option>
+                                                    <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:cunning,rankDivination) label(skill:Divination|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="divination">Divination</option>
                                                     <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:willpower,rankDivine) label(skill:Divine|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="divine">Divine</option>
                                                     <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:cunning,rankPrimal) label(skill:Primal|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="primal">Primal</option>
+                                                    <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:agility,rankPyromancy) label(skill:Pyromancy|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="pyromancy">Pyromancy</option>
+                                                    <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:intellect,rankTelekinesis) label(skill:Telekinesis|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="telekinesis">Telekinesis</option>
+                                                    <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:presence,rankTelepathy) label(skill:Telepathy|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="telepathy">Telepathy</option>
                                                 </optgroup>
                                                 <optgroup label="Combat Skills">
                                                     <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|encum|skill:brawn,rankBrawl) label(skill:Brawl|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="brawl">Brawl</option>
@@ -2869,7 +3045,10 @@
                                                     <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:presence,rankNegotiation) label(skill:Negotiation|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="negotiation">Negotiation</option>
                                                 </optgroup>
                                                 <optgroup label="Knowledge Skills">
+                                                    <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:intellect,rankCommonLore) label(skill:Common Lore|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="commonlore">Common Lore</option>
+                                                    <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:intellect,rankForbiddenLore) label(skill:Forbidden Lore|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="forbiddenlore">Forbidden Lore</option>
                                                     <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:intellect,rankKnowledge) label(skill:Knowledge|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="knowledge">Knowledge</option>
+                                                    <option value="!eed rollPlayer(character:@{planetaryRoleCharacterName}|skill:intellect,rankScholasticLore) label(skill:Scholastic Lore|Vehicle:@{transport-planetary-name}|Vehicle:@{transport-planetary-name}|Role:@{planetaryRoleName}) @{planetaryRoleDice} @{dicePool} (gmdice)" data-i18n="scholasticlore">Scholastic Lore</option>
                                                 </optgroup>
                                             </select>
                                         </td>
@@ -3215,14 +3394,14 @@
                                 <label class="sheet-label-threshold" data-i18n="threshold">Threshold</label>
                                 <label class="sheet-label-current" data-i18n="current">Current</label>
                             </td>
-                            <td rowspan="2">
+                            <td>
                                 <label class="sheet-label-title" data-i18n="defense">Defense</label>
                                 <input name="attr_transport-beast-rangeddefense" type="number" max="4" min="0" value="0" />
                                 <input name="attr_transport-beast-meleedefense" type="number" max="4" min="0" value="0" /><br />
                                 <label class="sheet-label-range" data-i18n="range">Range</label>
                                 <label class="sheet-label-melee" data-i18n="meleeshort">Melee</label>
                             </td>
-                            <td rowspan="2">
+                            <td>
                                 <label class="sheet-label-title" data-i18n="encum">Encum</label>
                                 <input name="attr_transport-beast-encumbrance_max" type="number" min="1" value="1" />
                                 <input name="attr_transport-beast-encumbrancemax" type="hidden" value="@{transport-beast-encumbrance|max}" disabled />
@@ -3230,7 +3409,7 @@
                                 <label class="sheet-label-threshold" data-i18n="threshold">Threshold</label>
                                 <label class="sheet-label-current" data-i18n="current">Current</label>
                             </td>
-                            <td rowspan="2">
+                            <td>
                                 <label class="sheet-label-title" data-i18n="silhouette">Silhouette</label>
                                 <input name="attr_transport-beast-silhouette" type="number" max="10" min="0" value="1" />
                             </td>
@@ -4136,14 +4315,14 @@
                                 <label class="sheet-label-threshold" data-i18n="threshold">Threshold</label>
                                 <label class="sheet-label-current" data-i18n="current">Current</label>
                             </td>
-                            <td rowspan="2">
+                            <td>
                                 <label class="sheet-label-title" data-i18n="defense">Defense</label>
                                 <input name="attr_companion-rangeddefense" type="number" max="4" min="0" value="0" />
                                 <input name="attr_companion-meleedefense" type="number" max="4" min="0" value="0" /><br />
                                 <label class="sheet-label-range" data-i18n="range">Range</label>
                                 <label class="sheet-label-melee" data-i18n="meleeshort">Melee</label>
                             </td>
-                            <td rowspan="2">
+                            <td>
                                 <label class="sheet-label-title" data-i18n="encum">Encum</label>
                                 <input name="attr_companion-encumbrance_max" type="number" max="99" min="1" value="1" />
                                 <input name="attr_companion-encumbrancemax" type="hidden" value="@{companion-encumbrance|max}" disabled />
@@ -4156,6 +4335,10 @@
                             <td colspan="2">
                                 <label class="sheet-label-title" data-i18n="soak">Soak</label>
                                 <input name="attr_companion-soak" type="number" max="99" min="1" value="1" />
+                            </td>
+                            <td colspan="2">
+                                <label class="sheet-label-title" data-i18n="corruption">Corruption</label>
+                                <input name="attr_companion-corruption" type="number" max="49" min="0" value="0" />
                             </td>
                         </tr>
                     </tbody>
@@ -4504,32 +4687,32 @@
                                 <tr>
                                     <td>
                                         <label data-i18n="brawn">Brawn</label>
-                                        <input name='attr_companion-brawn' type="number" max="7" min="1" value="1" />
+                                        <input name='attr_companion-brawn' type="number" max="7" min="1" value="1" class="characteristic"/>
                                     </td>
                                     <td></td>
                                     <td>
                                         <label data-i18n="agility">Agility</label>
-                                        <input name='attr_companion-agility' type="number" max="7" min="1" value="1" />
+                                        <input name='attr_companion-agility' type="number" max="7" min="1" value="1" class="characteristic"/>
                                     </td>
                                     <td></td>
                                     <td>
                                         <label data-i18n="intellect">Intellect</label>
-                                        <input name='attr_companion-intellect' type="number" max="7" min="1" value="1" />
+                                        <input name='attr_companion-intellect' type="number" max="7" min="1" value="1" class="characteristic"/>
                                     </td>
                                     <td></td>
                                     <td>
                                         <label data-i18n="cunning">Cunning</label>
-                                        <input name='attr_companion-cunning' type="number" max="7" min="1" value="1" />
+                                        <input name='attr_companion-cunning' type="number" max="7" min="1" value="1" class="characteristic"/>
                                     </td>
                                     <td></td>
                                     <td>
                                         <label data-i18n="willpower">Willpower</label>
-                                        <input name='attr_companion-willpower' type="number" max="7" min="1" value="1" />
+                                        <input name='attr_companion-willpower' type="number" max="7" min="1" value="1" class="characteristic"/>
                                     </td>
                                     <td></td>
                                     <td>
                                         <label data-i18n="presence">Presence</label>
-                                        <input name='attr_companion-presence' type="number" max="7" min="1" value="1" />
+                                        <input name='attr_companion-presence' type="number" max="7" min="1" value="1" class="characteristic"/>
                                     </td>
                                 </tr>
                             </tbody>
@@ -4583,8 +4766,8 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
+                            <tbody><!-- Companion Skills -->
+                                <tr data-i18n-list-item="alchemy" class="hide-alchemy hide-skill-row">
                                     <td>
                                         <label data-i18n="alchemyint">Alchemy (Int)</label>
                                     </td>
@@ -4604,7 +4787,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Alchemy' value='!eed characterID(@{character_id}) label(skill:Alchemy|Companion Name:@{companion-name}) @{companion-diceAlchemy} skill(@{companion-rankAlchemy}|@{companion-intellect}|Alchemy) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Alchemy-->
-                                <tr>
+                                <tr data-i18n-list-item="astrogation" class="hide-astrogation hide-skill-row">
                                     <td>
                                         <label data-i18n="astrogationint">Astrocartography (Int)</label>
                                     </td>
@@ -4624,7 +4807,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Astrogation' value='!eed characterID(@{character_id}) label(skill:Astrocartography|Companion Name:@{companion-name}) @{companion-diceAstrogation} skill(@{companion-rankAstrogation}|@{companion-intellect}|Astrogation) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Astrocartography-->
-                                <tr>
+                                <tr data-i18n-list-item="athletics" class="hide-athletics hide-skill-row">
                                     <td>
                                         <label data-i18n="athleticsbr">Athletics (Br)</label>
                                     </td>
@@ -4642,9 +4825,9 @@
                                     </td>
                                     <td><button type='roll' name='roll_Athletics' value='!eed characterID(@{character_id}) label(skill:Athletics|Companion Name:@{companion-name}) @{companion-diceAthletics} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankAthletics}|@{companion-brawn}|Athletics) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Athletics-->
-                                <tr>
+                                <tr data-i18n-list-item="computers" class="hide-computers hide-skill-row">
                                     <td>
-                                        <label data-i18n="computerint">Computers (Int)</label>
+                                        <label data-i18n="computersint">Computers (Int)</label>
                                     </td>
                                     <td><input name='attr_companion-careerskillComputers' type="checkbox" value="1"></td>
                                     <td><input type="number" name="attr_companion-rankComputers" max="6" min="0" value="0" /></td>
@@ -4660,7 +4843,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Computers' value='!eed characterID(@{character_id}) label(skill:Computers|Companion Name:@{companion-name}) @{companion-diceComputers} skill(@{companion-rankComputers}|@{companion-intellect}|Computers) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Computers-->
-                                <tr>
+                                <tr data-i18n-list-item="cool" class="hide-cool hide-skill-row">
                                     <td>
                                         <label data-i18n="coolpr">Cool (Pr)</label>
                                     </td>
@@ -4678,7 +4861,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Cool' value='!eed characterID(@{character_id}) label(skill:Cool|Companion Name:@{companion-name}) @{companion-diceCool} skill(@{companion-rankCool}|@{companion-presence}|Cool) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Cool-->
-                                <tr>
+                                <tr data-i18n-list-item="coordination" class="hide-coordination hide-skill-row">
                                     <td>
                                         <label data-i18n="coordinationag">Coordination (Ag)</label>
                                     </td>
@@ -4696,7 +4879,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Coordination' value='!eed characterID(@{character_id}) label(skill:Coordination|Companion Name:@{companion-name}) @{companion-diceCoordination} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankCoordination}|@{companion-agility}|Coordination) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Coordination-->
-                                <tr>
+                                <tr data-i18n-list-item="discipline" class="hide-discipline hide-skill-row">
                                     <td>
                                         <label data-i18n="disciplinewill">Discipline (Will)</label>
                                     </td>
@@ -4714,7 +4897,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Discipline' value='!eed characterID(@{character_id}) label(skill:Discipline|Companion Name:@{companion-name}) @{companion-diceDiscipline} skill(@{companion-rankDiscipline}|@{companion-willpower}|Discipline) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Discipline-->
-                                <tr>
+                                <tr data-i18n-list-item="driving" class="hide-driving hide-skill-row">
                                     <td>
                                         <label data-i18n="drivingag">Driving (Ag)</label>
                                     </td>
@@ -4732,7 +4915,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Driving' value='!eed characterID(@{character_id}) label(skill:Driving|Companion Name:@{companion-name}) @{companion-diceDriving} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankDriving}|@{companion-agility}|Driving) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Driving-->
-                                <tr>
+                                <tr data-i18n-list-item="mechanics" class="hide-mechanics hide-skill-row">
                                     <td>
                                         <label data-i18n="mechanicsint">Mechanics (Int)</label>
                                     </td>
@@ -4750,7 +4933,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Mechanics' value='!eed characterID(@{character_id}) label(skill:Mechanics|Companion Name:@{companion-name}) @{companion-diceMechanics} skill(@{companion-rankMechanics}|@{companion-intellect}|Mechanics) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Mechanics-->
-                                <tr>
+                                <tr data-i18n-list-item="medicae" class="hide-medicae hide-skill-row">
                                     <td>
                                         <label data-i18n="medicaeint">Medicae (Int)</label>
                                     </td>
@@ -4767,8 +4950,8 @@
                                         </div>
                                     </td>
                                     <td><button type='roll' name='roll_Medicae' value='!eed characterID(@{character_id}) label(skill:Medicae|Companion Name:@{companion-name}) @{companion-diceMedicae} skill(@{companion-rankMedicae}|@{companion-intellect}|Medicae) @{dicePool} (gmdice)'></button></td>
-                                </tr><!--Medicae-->
-                                <tr>
+                                </tr><!--Medicae - Dark Heresy Specific Skill-->
+                                <tr data-i18n-list-item="medicine" class="hide-medicine hide-skill-row">
                                     <td>
                                         <label data-i18n="medicineint">Medicine (Int)</label>
                                     </td>
@@ -4786,7 +4969,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Medicine' value='!eed characterID(@{character_id}) label(skill:Medicine|Companion Name:@{companion-name}) @{companion-diceMedicine} skill(@{companion-rankMedicine}|@{companion-intellect}|Medicine) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Medicine-->
-                                <tr>
+                                <tr data-i18n-list-item="perception" class="hide-perception hide-skill-row">
                                     <td>
                                         <label data-i18n="perceptioncun">Perception (Cun)</label>
                                     </td>
@@ -4804,7 +4987,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Perception' value='!eed characterID(@{character_id}) label(skill:Perception|Companion Name:@{companion-name}) @{companion-dicePerception} skill(@{companion-rankPerception}|@{companion-cunning}|Perception) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Perception-->
-                                <tr>
+                                <tr data-i18n-list-item="piloting" class="hide-piloting hide-skill-row">
                                     <td>
                                         <label data-i18n="pilotingag">Piloting (Ag)</label>
                                     </td>
@@ -4822,7 +5005,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Piloting' value='!eed characterID(@{character_id}) label(skill:Piloting|Companion Name:@{companion-name}) @{companion-dicePiloting} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankPiloting}|@{companion-agility}|PilotingPiloting) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Piloting-->
-                                <tr>
+                                <tr data-i18n-list-item="resilience" class="hide-resilience hide-skill-row">
                                     <td>
                                         <label data-i18n="resiliencebr">Resilience (Br)</label>
                                     </td>
@@ -4840,7 +5023,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Resilience' value='!eed characterID(@{character_id}) label(skill:Resilience|Companion Name:@{companion-name}) @{companion-diceResilience} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankResilience}|@{companion-brawn}|Resilience) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Resilience-->
-                                <tr>
+                                <tr data-i18n-list-item="riding" class="hide-riding hide-skill-row">
                                     <td>
                                         <label data-i18n="ridingag">Riding (Ag)</label>
                                     </td>
@@ -4858,7 +5041,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Riding' value='!eed characterID(@{character_id}) label(skill:Riding|Companion Name:@{companion-name}) @{companion-diceRiding} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankRiding}|@{companion-agility}|Riding) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Riding-->
-                                <tr>
+                                <tr data-i18n-list-item="Skulduggery" class="hide-skulduggery hide-skill-row">
                                     <td>
                                         <label data-i18n="skulduggerycun">Skulduggery (Cun)</label>
                                     </td>
@@ -4876,7 +5059,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Skulduggery' value='!eed characterID(@{character_id}) label(skill:Skulduggery|Companion Name:@{companion-name}) @{companion-diceSkulduggery} skill(@{companion-rankSkulduggery}|@{companion-cunning}|Skulduggery) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Skulduggery-->
-                                <tr>
+                                <tr data-i18n-list-item="stealth" class="hide-stealth hide-skill-row">
                                     <td>
                                         <label data-i18n="stealthag">Stealth (Ag)</label>
                                     </td>
@@ -4894,7 +5077,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Stealth' value='!eed characterID(@{character_id}) label(skill:Stealth|Companion Name:@{companion-name}) @{companion-diceStealth} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankStealth}|@{companion-agility}|Stealth) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Stealth-->
-                                <tr>
+                                <tr data-i18n-list-item="streetwise" class="hide-streetwise hide-skill-row">
                                     <td>
                                         <label data-i18n="streetwisecun">Streetwise (Cun)</label>
                                     </td>
@@ -4912,7 +5095,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Streetwise' value='!eed characterID(@{character_id}) label(skill:Streetwise|Companion Name:@{companion-name}) @{companion-diceStreetwise} skill(@{companion-rankStreetwise}|@{companion-cunning}|Streetwise) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Streetwise-->
-                                <tr>
+                                <tr data-i18n-list-item="survival" class="hide-survival hide-skill-row">
                                     <td>
                                         <label data-i18n="survivalcun">Survival (Cun)</label>
                                     </td>
@@ -4930,7 +5113,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Survival' value='!eed characterID(@{character_id}) label(skill:Survival|Companion Name:@{companion-name}) @{companion-diceSurvival} skill(@{companion-rankSurvival}|@{companion-cunning}|Survival) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Survival-->
-                                <tr>
+                                <tr data-i18n-list-item="techuse" class="hide-techuse hide-skill-row">
                                     <td>
                                         <label data-i18n="techuseint">Tech-Use (Int)</label>
                                     </td>
@@ -4947,8 +5130,8 @@
                                         </div>
                                     </td>
                                     <td><button type='roll' name='roll_TechUse' value='!eed characterID(@{character_id}) label(skill:Tech-Use|Companion Name:@{companion-name}) @{companion-diceTechUse} skill(@{companion-rankTechUse}|@{companion-intellect}|TechUse) @{dicePool} (gmdice)'></button></td>
-                                </tr><!--TechUse-->
-                                <tr>
+                                </tr><!--TechUse - Dark Heresy specific skill -->
+                                <tr data-i18n-list-item="vigilance" class="hide-vigilance hide-skill-row">
                                     <td>
                                         <label data-i18n="vigilancewill">Vigilance (Will)</label>
                                     </td>
@@ -4971,14 +5154,14 @@
                         <table class="sheet-skills" cellspacing="0" cellpadding="0" border="0">
                             <thead>
                                 <tr>
-                                    <th data-i18n="magicskills">Magic Skills</th>
+                                    <th data-i18n="psychicpowers">Psychic Powers</th>
                                     <th data-i18n="career">Career</th>
                                     <th colspan="2" data-i18n="rank">Rank</th>
                                     <th colspan="2" data-i18n="mods">Mods</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr data-i18n-list-item="arcana" class="hide-arcana hide-skill-row">
                                     <td>
                                         <label data-i18n="arcanaint">Arcana (Int)</label>
                                     </td>
@@ -4996,7 +5179,43 @@
                                     </td>
                                     <td><button type='roll' name='roll_Arcana' value='!eed characterID(@{character_id}) label(skill:Arcana|Companion Name:@{companion-name}) @{companion-diceArcana} skill(@{companion-rankArcana}|@{companion-intellect}|Arcana) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Arcana-->
-                                <tr>
+                                <tr data-i18n-list-item="biomancy" class="hide-biomancy hide-skill-row">
+                                    <td>
+                                        <label data-i18n="biomancybr">Biomancy (Br)</label>
+                                    </td>
+                                    <td><input name='attr_companion-careerskillBiomancy' type="checkbox" value="1"></td>
+                                    <td><input type="number" name="attr_companion-rankBiomancy" max="6" min="0" value="0" /></td>
+                                    <td>
+                                        <input class="sheet-yd" type="hidden" name="attr_companion-yBiomancy" value="(((@{companion-brawn} + @{companion-rankBiomancy}) - abs(@{companion-brawn} - @{companion-rankBiomancy})) / 2)" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_companion-gBiomancy" value="((((@{companion-brawn} + @{companion-rankBiomancy}) + abs(@{companion-brawn} - @{companion-rankBiomancy})) / 2) - @{companion-yBiomancy})" disabled><span></span>
+                                    </td>
+                                    <td>
+                                        <div class="sheet-dice-icon"></div>
+                                        <div class="sheet-dice-input">
+                                            <input type="text" name="attr_companion-diceBiomancy" />
+                                        </div>
+                                    </td>
+                                    <td><button type='roll' name='roll_Biomancy' value='!eed characterID(@{character_id}) label(skill:Biomancy|Companion Name:@{companion-name}) @{companion-diceBiomancy} skill(@{companion-rankBiomancy}|@{companion-brawn}|Biomancy) @{dicePool} (gmdice)'></button></td>
+                                </tr><!--Biomancy - Psychic Power - Dark Heresy specific Skill -->
+                                <tr data-i18n-list-item="divination" class="hide-divination hide-skill-row">
+                                    <td>
+                                        <label data-i18n="divinationcun">Divination (Cun)</label>
+                                    </td>
+                                    <td><input name='attr_companion-careerskillDivination' type="checkbox" value="1"></td>
+                                    <td><input type="number" name="attr_companion-rankDivination" max="6" min="0" value="0" /></td>
+                                    <td>
+                                        <input class="sheet-yd" type="hidden" name="attr_companion-yDivination" value="(((@{companion-cunning} + @{companion-rankDivination}) - abs(@{companion-cunning} - @{companion-rankDivination})) / 2)" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_companion-gDivination" value="((((@{companion-cunning} + @{companion-rankDivination}) + abs(@{companion-cunning} - @{companion-rankDivination})) / 2) - @{companion-yDivination})" disabled><span></span>
+                                    </td>
+                                    <td>
+                                        <div class="sheet-dice-icon"></div>
+                                        <div class="sheet-dice-input">
+                                            <input type="text" name="attr_companion-diceDivination" />
+                                        </div>
+                                    </td>
+                                    <td><button type='roll' name='roll_Divination' value='!eed characterID(@{character_id}) label(skill:Divination|Companion Name:@{companion-name}) @{companion-diceDivination} skill(@{companion-rankDivination}|@{companion-cunning}|Divination) @{dicePool} (gmdice)'></button></td>
+                                </tr><!--Divination - Psychic Power - Dark Heresy specific Skill -->
+                                <tr data-i18n-list-item="divine" class="hide-divine hide-skill-row">
                                     <td>
                                         <label data-i18n="divinewill">Divine (Will)</label>
                                     </td>
@@ -5014,7 +5233,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Divine' value='!eed characterID(@{character_id}) label(skill:Divine|Companion Name:@{companion-name}) @{companion-diceDivine} skill(@{companion-rankDivine}|@{companion-willpower}|Divine) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Divine-->
-                                <tr>
+                                <tr data-i18n-list-item="primal" class="hide-primal hide-skill-row">
                                     <td>
                                         <label data-i18n="primalcun">Primal (Cun)</label>
                                     </td>
@@ -5032,8 +5251,62 @@
                                     </td>
                                     <td><button type='roll' name='roll_Primal' value='!eed characterID(@{character_id}) label(skill:Primal|Companion Name:@{companion-name}) @{companion-dicePrimal} skill(@{companion-rankPrimal}|@{companion-cunning}|Primal) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Primal-->
+                                <tr data-i18n-list-item="pyromancy" class="hide-pyromancy hide-skill-row">
+                                    <td>
+                                        <label data-i18n="pyromancyag">Pyromancy (Ag)</label>
+                                    </td>
+                                    <td><input name='attr_companion-careerskillPyromancy' type="checkbox" value="1"></td>
+                                    <td><input type="number" name="attr_companion-rankPyromancy" max="6" min="0" value="0" /></td>
+                                    <td>
+                                        <input class="sheet-yd" type="hidden" name="attr_companion-yPyromancy" value="(((@{companion-agility} + @{companion-rankPyromancy}) - abs(@{companion-agility} - @{companion-rankPyromancy})) / 2)" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_companion-gPyromancy" value="((((@{companion-agility} + @{companion-rankPyromancy}) + abs(@{companion-agility} - @{companion-rankPyromancy})) / 2) - @{companion-yPyromancy})" disabled><span></span>
+                                    </td>
+                                    <td>
+                                        <div class="sheet-dice-icon"></div>
+                                        <div class="sheet-dice-input">
+                                            <input type="text" name="attr_companion-dicePyromancy" />
+                                        </div>
+                                    </td>
+                                    <td><button type='roll' name='roll_Pyromancy' value='!eed characterID(@{character_id}) label(skill:Pyromancy|Companion Name:@{companion-name}) @{companion-dicePyromancy} skill(@{companion-rankPyromancy}|@{companion-agility}|Pyromancy) @{dicePool} (gmdice)'></button></td>
+                                </tr><!--Pyromancy - Psychic Power - Dark Heresy specific Skill -->
+                                <tr data-i18n-list-item="telekinesis" class="hide-telekinesis hide-skill-row">
+                                    <td>
+                                        <label data-i18n="telekinesisint">Telekinesis (Int)</label>
+                                    </td>
+                                    <td><input name='attr_companion-careerskillTelekinesis' type="checkbox" value="1"></td>
+                                    <td><input type="number" name="attr_companion-rankTelekinesis" max="6" min="0" value="0" /></td>
+                                    <td>
+                                        <input class="sheet-yd" type="hidden" name="attr_companion-yTelekinesis" value="(((@{companion-intellect} + @{companion-rankTelekinesis}) - abs(@{companion-intellect} - @{companion-rankTelekinesis})) / 2)" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_companion-gTelekinesis" value="((((@{companion-intellect} + @{companion-rankTelekinesis}) + abs(@{companion-intellect} - @{companion-rankTelekinesis})) / 2) - @{companion-yTelekinesis})" disabled><span></span>
+                                    </td>
+                                    <td>
+                                        <div class="sheet-dice-icon"></div>
+                                        <div class="sheet-dice-input">
+                                            <input type="text" name="attr_companion-diceTelekinesis" />
+                                        </div>
+                                    </td>
+                                    <td><button type='roll' name='roll_Telekinesis' value='!eed characterID(@{character_id}) label(skill:Telekinesis|Companion Name:@{companion-name}) @{companion-diceTelekinesis} skill(@{companion-rankTelekinesis}|@{companion-intellect}|Telekinesis) @{dicePool} (gmdice)'></button></td>
+                                </tr><!--Telekinesis - Psychic Power - Dark Heresy specific Skill -->
+                                <tr data-i18n-list-item="telepathy" class="hide-telepathy hide-skill-row">
+                                    <td>
+                                        <label data-i18n="telepathypr">Telepathy (Pr)</label>
+                                    </td>
+                                    <td><input name='attr_companion-careerskillTelepathy' type="checkbox" value="1"></td>
+                                    <td><input type="number" name="attr_companion-rankTelepathy" max="6" min="0" value="0" /></td>
+                                    <td>
+                                        <input class="sheet-yd" type="hidden" name="attr_companion-yTelepathy" value="(((@{companion-presence} + @{companion-rankTelepathy}) - abs(@{companion-presence} - @{companion-rankTelepathy})) / 2)" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_companion-gTelepathy" value="((((@{companion-presence} + @{companion-rankTelepathy}) + abs(@{companion-presence} - @{companion-rankTelepathy})) / 2) - @{companion-yTelepathy})" disabled><span></span>
+                                    </td>
+                                    <td>
+                                        <div class="sheet-dice-icon"></div>
+                                        <div class="sheet-dice-input">
+                                            <input type="text" name="attr_companion-diceTelepathy" />
+                                        </div>
+                                    </td>
+                                    <td><button type='roll' name='roll_Telepathy' value='!eed characterID(@{character_id}) label(skill:Telepathy|Companion Name:@{companion-name}) @{companion-diceTelepathy} skill(@{companion-rankTelepathy}|@{companion-presence}|Telepathy) @{dicePool} (gmdice)'></button></td>
+                                </tr><!--Telepathy - Psychic Power - Dark Heresy specific Skill -->
                             </tbody>
-                        </table><!--Magic Skills Section-->
+                        </table><!--Magic Skills - Psychic Powers - Section-->
                         <table class="sheet-skills" cellspacing="0" cellpadding="0" border="0">
                             <thead>
                                 <tr>
@@ -5044,7 +5317,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr data-i18n-list-item="brawl" class="hide-brawl hide-skill-row">
                                     <td>
                                         <label data-i18n="brawlbr">Brawl (Br)</label>
                                     </td>
@@ -5062,7 +5335,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Brawl' value='!eed characterID(@{character_id}) label(skill:Brawl|Companion Name:@{companion-name}) @{companion-diceBrawl} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankBrawl}|@{companion-brawn}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Brawl-->
-                                <tr>
+                                <tr data-i18n-list-item="gunnery" class="hide-gunnery hide-skill-row">
                                     <td>
                                         <label data-i18n="gunneryagi">Gunnery (Agi)</label>
                                     </td>
@@ -5080,7 +5353,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Gunnery' value='!eed characterID(@{character_id}) label(skill:Gunnery|Companion Name:@{companion-name}) @{companion-diceGunnery} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankGunnery}|@{companion-agility}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Gunnery-->
-                                <tr>
+                                <tr data-i18n-list-item="melee" class="hide-melee hide-skill-row">
                                     <td>
                                         <label data-i18n="meleebr">Melee (Br)</label>
                                     </td>
@@ -5098,7 +5371,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Melee' value='!eed characterID(@{character_id}) label(skill:Melee|Companion Name:@{companion-name}) @{companion-diceMelee} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankMelee}|@{companion-brawn}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Melee-->
-                                <tr>
+                                <tr data-i18n-list-item="meleelight" class="hide-meleelight hide-skill-row">
                                     <td>
                                         <label data-i18n="meleelightbr">Melee - Light (Br)</label>
                                     </td>
@@ -5116,7 +5389,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_MeleeLight' value='!eed characterID(@{character_id}) label(skill:Melee (Light)|Companion Name:@{companion-name}) @{companion-diceMeleeLight} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankMeleeLight}|@{companion-brawn}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Melee - Light-->
-                                <tr>
+                                <tr data-i18n-list-item="meleeheavy" class="hide-meleeheavy hide-skill-row">
                                     <td>
                                         <label data-i18n="meleeheavybr">Melee - Heavy (Br)</label>
                                     </td>
@@ -5134,7 +5407,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_MeleeHeavy' value='!eed characterID(@{character_id}) label(skill:Melee (Heavy)|Companion Name:@{companion-name}) @{companion-diceMeleeHeavy} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankMeleeHeavy}|@{companion-brawn}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Melee - Heavy-->
-                                <tr>
+                                <tr data-i18n-list-item="ranged" class="hide-ranged hide-skill-row">
                                     <td>
                                         <label data-i18n="rangedag">Ranged (Ag)</label>
                                     </td>
@@ -5152,7 +5425,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Ranged' value='!eed characterID(@{character_id}) label(skill:Ranged|Companion Name:@{companion-name}) @{companion-diceRanged} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankRanged}|@{companion-agility}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Ranged-->
-                                <tr>
+                                <tr data-i18n-list-item="rangedlight" class="hide-rangedlight hide-skill-row">
                                     <td>
                                         <label data-i18n="rangedlightag">Ranged - Light (Ag)</label>
                                     </td>
@@ -5170,7 +5443,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Light' value='!eed characterID(@{character_id}) label(skill:Ranged - Light|Companion Name:@{companion-name}) @{companion-diceRanged - Light} encum(@{encumbrancemax}|@{encumbrance}) skill(@{companion-rankLight}|@{companion-agility}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Ranged - Light-->
-                                <tr>
+                                <tr data-i18n-list-item="rangedheavy" class="hide-rangedheavy hide-skill-row">
                                     <td>
                                         <label data-i18n="rangedheavyag">Ranged - Heavy (Ag)</label>
                                     </td>
@@ -5200,7 +5473,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr data-i18n-list-item="charm" class="hide-charm hide-skill-row">
                                     <td>
                                         <label data-i18n="charmpr">Charm (Pr)</label>
                                     </td>
@@ -5218,7 +5491,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Charm' value='!eed characterID(@{character_id}) label(skill:Charm|Companion Name:@{companion-name}) @{companion-diceCharm} skill(@{companion-rankCharm}|@{companion-presence}|Charm) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Charm-->
-                                <tr>
+                                <tr data-i18n-list-item="coercion" class="hide-coercion hide-skill-row">
                                     <td>
                                         <label data-i18n="coercionwill">Coercion (Will)</label>
                                     </td>
@@ -5236,7 +5509,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Coercion' value='!eed characterID(@{character_id}) label(skill:Coercion|Companion Name:@{companion-name}) @{companion-diceCoercion} skill(@{companion-rankCoercion}|@{companion-willpower}|Coercion) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Coercion-->
-                                <tr>
+                                <tr data-i18n-list-item="deception" class="hide-deception hide-skill-row">
                                     <td>
                                         <label data-i18n="deceptioncun">Deception (Cun)</label>
                                     </td>
@@ -5254,7 +5527,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Deception' value='!eed characterID(@{character_id}) label(skill:Deception|Companion Name:@{companion-name}) @{companion-diceDeception} skill(@{companion-rankDeception}|@{companion-cunning}|Deception) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Deception-->
-                                <tr>
+                                <tr data-i18n-list-item="leadership" class="hide-leadership hide-skill-row">
                                     <td>
                                         <label data-i18n="leadershippre">Leadership (Pr)</label>
                                     </td>
@@ -5272,7 +5545,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Leadership' value='!eed characterID(@{character_id}) label(skill:Leadership|Companion Name:@{companion-name}) @{companion-diceLeadership} skill(@{companion-rankLeadership}|@{companion-presence}|Leadership) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Leadership-->
-                                <tr>
+                                <tr data-i18n-list-item="negotiation" class="hide-negotiation hide-skill-row">
                                     <td>
                                         <label data-i18n="negotiationpr">Negotiation (Pr)</label>
                                     </td>
@@ -5302,7 +5575,43 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr data-i18n-list-item="commonlore" class="hide-commonlore hide-skill-row">
+                                    <td>
+                                        <label data-i18n="commonloreint">Common Lore (Int)</label>
+                                    </td>
+                                    <td><input name='attr_companion-careerskillCommonLore' type="checkbox" value="1"></td>
+                                    <td><input type="number" name="attr_companion-rankCommonLore" max="6" min="0" value="0" /></td>
+                                    <td>
+                                        <input class="sheet-yd" type="hidden" name="attr_companion-yCommonLore" value="(((@{companion-intellect} + @{companion-rankCommonLore}) - abs(@{companion-intellect} - @{companion-rankCommonLore})) / 2)" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_companion-gCommonLore" value="((((@{companion-intellect} + @{companion-rankCommonLore}) + abs(@{companion-intellect} - @{companion-rankCommonLore})) / 2) - @{companion-yCommonLore})" disabled><span></span>
+                                    </td>
+                                    <td>
+                                        <div class="sheet-dice-icon"></div>
+                                        <div class="sheet-dice-input">
+                                            <input type="text" name="attr_companion-diceCommonLore" />
+                                        </div>
+                                    </td>
+                                    <td><button type='roll' name='roll_CommonLore' value='!eed characterID(@{character_id}) label(skill:Common Lore|Companion Name:@{companion-name}) @{companion-diceCommonLore} skill(@{companion-rankCommonLore}|@{companion-intellect}) @{dicePool} (gmdice)'></button></td>
+                                </tr><!--Common Lore Dark Heresy specific skill-->
+                                <tr data-i18n-list-item="forbiddenlore" class="hide-forbiddenlore hide-skill-row">
+                                    <td>
+                                        <label data-i18n="forbiddenloreint">Frobidden Lore (Int)</label>
+                                    </td>
+                                    <td><input name='attr_companion-careerskillForbiddenLore' type="checkbox" value="1"></td>
+                                    <td><input type="number" name="attr_companion-rankForbiddenLore" max="6" min="0" value="0" /></td>
+                                    <td>
+                                        <input class="sheet-yd" type="hidden" name="attr_companion-yForbiddenLore" value="(((@{companion-intellect} + @{companion-rankForbiddenLore}) - abs(@{companion-intellect} - @{companion-rankForbiddenLore})) / 2)" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_companion-gForbiddenLore" value="((((@{companion-intellect} + @{companion-rankForbiddenLore}) + abs(@{companion-intellect} - @{companion-rankForbiddenLore})) / 2) - @{companion-yForbiddenLore})" disabled><span></span>
+                                    </td>
+                                    <td>
+                                        <div class="sheet-dice-icon"></div>
+                                        <div class="sheet-dice-input">
+                                            <input type="text" name="attr_companion-diceForbiddenLore" />
+                                        </div>
+                                    </td>
+                                    <td><button type='roll' name='roll_ForbiddenLore' value='!eed characterID(@{character_id}) label(skill:Forbidden Lore|Companion Name:@{companion-name}) @{companion-diceForbiddenLore} skill(@{companion-rankForbiddenLore}|@{companion-intellect}) @{dicePool} (gmdice)'></button></td>
+                                </tr><!--Forbidden Lore Dark Heresy specific skill-->
+                                <tr data-i18n-list-item="knowledge" class="hide-knowledge hide-skill-row">
                                     <td>
                                         <label data-i18n="knowledgeint">Knowledge (Int)</label>
                                     </td>
@@ -5319,7 +5628,25 @@
                                         </div>
                                     </td>
                                     <td><button type='roll' name='roll_Knowledge' value='!eed characterID(@{character_id}) label(skill:Knowledge|Companion Name:@{companion-name}) @{companion-diceKnowledge} skill(@{companion-rankKnowledge}|@{companion-intellect}) @{dicePool} (gmdice)'></button></td>
-                                </tr><!--Core Worlds-->
+                                </tr><!--Knowledge-->
+                                <tr data-i18n-list-item="scholasticlore" class="hide-scholasticlore hide-skill-row">
+                                    <td>
+                                        <label data-i18n="scholasticloreint">Scholastic Lore (Int)</label>
+                                    </td>
+                                    <td><input name='attr_companion-careerskillScholasticLore' type="checkbox" value="1"></td>
+                                    <td><input type="number" name="attr_companion-rankScholasticLore" max="6" min="0" value="0" /></td>
+                                    <td>
+                                        <input class="sheet-yd" type="hidden" name="attr_companion-yScholasticLore" value="(((@{companion-intellect} + @{companion-rankScholasticLore}) - abs(@{companion-intellect} - @{companion-rankScholasticLore})) / 2)" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_companion-gScholasticLore" value="((((@{companion-intellect} + @{companion-rankScholasticLore}) + abs(@{companion-intellect} - @{companion-rankScholasticLore})) / 2) - @{companion-yScholasticLore})" disabled><span></span>
+                                    </td>
+                                    <td>
+                                        <div class="sheet-dice-icon"></div>
+                                        <div class="sheet-dice-input">
+                                            <input type="text" name="attr_companion-diceScholasticLore" />
+                                        </div>
+                                    </td>
+                                    <td><button type='roll' name='roll_ScholasticLore' value='!eed characterID(@{character_id}) label(skill:Scholastic Lore|Companion Name:@{companion-name}) @{companion-diceScholasticLore} skill(@{companion-rankScholasticLore}|@{companion-intellect}) @{dicePool} (gmdice)'></button></td>
+                                </tr><!--Scholastic Lore Dark Heresy specific skill-->
                             </tbody>
                         </table><!--Knowledge Skills Section-->
                         <table class="sheet-skills sheet-custome-skills" cellspacing="0" cellpadding="0" border="0">
@@ -5474,10 +5801,15 @@
                                         <td><label data-i18n="skilllist">Skill List</label></td>
                                         <td colspan="2">
                                             <select name='attr_companion-MagicSkill'>
-                                                <optgroup label="Magic Skills" data-i18n-label="magicskills">
+                                                <optgroup label="Magic Skills" data-i18n-label="psychicpowers">
                                                     <option value="!eed rollPlayer(character:@{name}|skill:companion-intellect,companion-rankArcana) label(skill:Companion Magic Power|Companion Name: @{companion-name}|Skill Name: Arcana|Power Name:@{companion-magicpowername}) @{dicePool} (gmdice)" data-i18n="arcana">Arcana</option>
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:companion-brawn,companion-rankBiomancy) label(skill:Companion Magic Power|Companion Name: @{companion-name}|Skill Name: Biomancy|Power Name:@{companion-magicpowername}) @{dicePool} (gmdice)" data-i18n="biomancy">Biomancy</option>
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:companion-cunning,companion-rankDivination) label(skill:Companion Magic Power|Companion Name: @{companion-name}|Skill Name: Divination|Power Name:@{companion-magicpowername}) @{dicePool} (gmdice)" data-i18n="divination">Divination</option>
                                                     <option value="!eed rollPlayer(character:@{name}|skill:companion-willpower,companion-rankDivine) label(skill:Companion Magic Power|Companion Name: @{companion-name}|Skill Name: Divine|Power Name:@{companion-magicpowername}) @{dicePool} (gmdice)" data-i18n="divine">Divine</option>
                                                     <option value="!eed rollPlayer(character:@{name}|skill:companion-cunning,companion-rankPrimal) label(skill:Companion Magic Power|Companion Name: @{companion-name}|Skill Name: Primal|Power Name:@{companion-magicpowername}) @{dicePool} (gmdice)" data-i18n="primal">Primal</option>
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:companion-agility,companion-rankPyromancy) label(skill:Companion Magic Power|Companion Name: @{companion-name}|Skill Name: Pyromancy|Power Name:@{companion-magicpowername}) @{dicePool} (gmdice)" data-i18n="pyromancy">Pyromancy</option>
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:companion-intellect,companion-rankTelekinesis) label(skill:Companion Magic Power|Companion Name: @{companion-name}|Skill Name: Telekinesis|Power Name:@{companion-magicpowername}) @{dicePool} (gmdice)" data-i18n="telekinesis">Telekinesis</option>
+                                                    <option value="!eed rollPlayer(character:@{name}|skill:companion-presence,companion-rankTelepathy) label(skill:Companion Magic Power|Companion Name: @{companion-name}|Skill Name: Telepathy|Power Name:@{companion-magicpowername}) @{dicePool} (gmdice)" data-i18n="telepathy">Telepathy</option>
                                                 </optgroup>
                                             </select>
                                         </td><!--Skill List-->
@@ -5947,14 +6279,14 @@
                                 <label class="sheet-label-threshold" data-i18n="threshold">Threshold</label>
                                 <label class="sheet-label-current" data-i18n="current">Current</label>
                             </td>
-                            <td rowspan="2">
+                            <td>
                                 <label class="sheet-label-title" data-i18n="defense">Defense</label>
                                 <input name="attr_npc-rangeddefense" type="number" max="4" min="0" value="0" />
                                 <input name="attr_npc-meleedefense" type="number" max="4" min="0" value="0" /><br />
                                 <label class="sheet-label-range" data-i18n="range">Range</label>
                                 <label class="sheet-label-melee" data-i18n="meleeshort">Melee</label>
                             </td>
-                            <td rowspan="2">
+                            <td>
                                 <label class="sheet-label-title" data-i18n="encum">Encum</label>
                                 <input name="attr_npc-encumbrance_max" type="number" max="99" min="1" value="1" />
                                 <input name="attr_npc-encumbrancemax" type="hidden" value="@{npc-encumbrance|max}" disabled />
@@ -6262,32 +6594,32 @@
                                 <tr>
                                     <td>
                                         <label data-i18n="brawn">Brawn</label>
-                                        <input name='attr_npc-brawn' type="number" max="7" min="1" value="1" />
+                                        <input name='attr_npc-brawn' type="number" max="7" min="1" value="1" class="characteristic" />
                                     </td>
                                     <td></td>
                                     <td>
                                         <label data-i18n="agility">Agility</label>
-                                        <input name='attr_npc-agility' type="number" max="7" min="1" value="1" />
+                                        <input name='attr_npc-agility' type="number" max="7" min="1" value="1" class="characteristic" />
                                     </td>
                                     <td></td>
                                     <td>
                                         <label data-i18n="intellect">Intellect</label>
-                                        <input name='attr_npc-intellect' type="number" max="7" min="1" value="1" />
+                                        <input name='attr_npc-intellect' type="number" max="7" min="1" value="1" class="characteristic" />
                                     </td>
                                     <td></td>
                                     <td>
                                         <label data-i18n="cunning">Cunning</label>
-                                        <input name='attr_npc-cunning' type="number" max="7" min="1" value="1" />
+                                        <input name='attr_npc-cunning' type="number" max="7" min="1" value="1" class="characteristic" />
                                     </td>
                                     <td></td>
                                     <td>
                                         <label data-i18n="willpower">Willpower</label>
-                                        <input name='attr_npc-willpower' type="number" max="7" min="1" value="1" />
+                                        <input name='attr_npc-willpower' type="number" max="7" min="1" value="1" class="characteristic" />
                                     </td>
                                     <td></td>
                                     <td>
                                         <label data-i18n="presence">Presence</label>
-                                        <input name='attr_npc-presence' type="number" max="7" min="1" value="1" />
+                                        <input name='attr_npc-presence' type="number" max="7" min="1" value="1" class="characteristic" />
                                     </td>
                                 </tr>
                             </tbody>
@@ -6341,7 +6673,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr data-i18n-list-item="cool" class="hide-cool hide-skill-row">
                                     <td>
                                         <label data-i18n="coolpr">Cool (Pr)</label>
                                     </td>
@@ -6359,7 +6691,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Cool' value='!eed characterID(@{character_id}) label(skill:Cool) @{npc-diceCool} skill(@{npc-rankCool}|@{npc-presence}|@{npc-minion-group-size}|@{npc-minionskillCool}|Cool) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Cool-->
-                                <tr>
+                                <tr data-i18n-list-item="vigilance" class="hide-vigilance hide-skill-row">
                                     <td>
                                         <label data-i18n="vigilancewill">Vigilance (Will)</label>
                                     </td>
@@ -6389,7 +6721,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr data-i18n-list-item="brawl" class="hide-brawl hide-skill-row">
                                     <td>
                                         <label data-i18n="brawlbr">Brawl (Br)</label>
                                     </td>
@@ -6407,7 +6739,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Brawl' value='!eed characterID(@{character_id}) label(skill:Brawl) @{npc-diceBrawl} encum(@{encumbrancemax}|@{encumbrance}) skill(@{npc-rankBrawl}|@{npc-brawn}|@{npc-minion-group-size}|@{npc-minionskillBrawl}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Brawl-->
-                                <tr>
+                                <tr data-i18n-list-item="gunnery" class="hide-gunnery hide-skill-row">
                                     <td>
                                         <label data-i18n="gunneryagi">Gunnery (Agi)</label>
                                     </td>
@@ -6425,7 +6757,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Gunnery' value='!eed characterID(@{character_id}) label(skill:Gunnery) @{npc-diceGunnery} encum(@{encumbrancemax}|@{encumbrance}) skill(@{npc-rankGunnery}|@{npc-agility}|@{npc-minion-group-size}|@{npc-minionskillGunnery}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Gunnery-->
-                                <tr>
+                                <tr data-i18n-list-item="melee" class="hide-melee hide-skill-row">
                                     <td>
                                         <label data-i18n="meleebr">Melee (Br)</label>
                                     </td>
@@ -6443,7 +6775,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Melee' value='!eed characterID(@{character_id}) label(skill:Melee) @{npc-diceMelee} encum(@{encumbrancemax}|@{encumbrance}) skill(@{npc-rankMelee}|@{npc-brawn}|@{npc-minion-group-size}|@{npc-minionskillMelee}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Melee-->
-                                <tr>
+                                <tr data-i18n-list-item="meleelight" class="hide-meleelight hide-skill-row">
                                     <td>
                                         <label data-i18n="meleelightbr">Melee (Light) (Br)</label>
                                     </td>
@@ -6461,7 +6793,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_MeleeLight' value='!eed characterID(@{character_id}) label(skill:Melee - Light) @{npc-diceMeleeLight} encum(@{encumbrancemax}|@{encumbrance}) skill(@{npc-rankMeleeLight}|@{npc-brawn}|@{npc-minion-group-size}|@{npc-minionskillMeleeLight}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Melee - Light-->
-                                <tr>
+                                <tr data-i18n-list-item="meleeheavy" class="hide-meleeheavy hide-skill-row">
                                     <td>
                                         <label data-i18n="meleeheavybr">Melee (Heavy) (Br)</label>
                                     </td>
@@ -6479,7 +6811,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_MeleeHeavy' value='!eed characterID(@{character_id}) label(skill:Melee - Heavy) @{npc-diceMeleeHeavy} encum(@{encumbrancemax}|@{encumbrance}) skill(@{npc-rankMeleeHeavy}|@{npc-brawn}|@{npc-minion-group-size}|@{npc-minionskillMeleeHeavy}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Melee - Heavy-->
-                                <tr>
+                                <tr data-i18n-list-item="ranged" class="hide-ranged hide-skill-row">
                                     <td>
                                         <label data-i18n="rangedag">Ranged (Ag)</label>
                                     </td>
@@ -6497,7 +6829,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Ranged' value='!eed characterID(@{character_id}) label(skill:Ranged) @{npc-diceRanged} encum(@{encumbrancemax}|@{encumbrance}) skill(@{npc-rankRanged}|@{npc-agility}|@{npc-minion-group-size}|@{npc-minionskillRanged}|Ranged) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Ranged-->
-                                <tr>
+                                <tr data-i18n-list-item="rangedlight" class="hide-rangedlight hide-skill-row">
                                     <td>
                                         <label data-i18n="rangedlightag">Ranged - Light (Ag)</label>
                                     </td>
@@ -6515,7 +6847,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Light' value='!eed characterID(@{character_id}) label(skill:Ranged - Light) @{npc-diceLight} encum(@{encumbrancemax}|@{encumbrance}) skill(@{npc-rankLight}|@{npc-agility}|@{npc-minion-group-size}|@{npc-minionskillLight}|RangedLight) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Ranged - Light-->
-                                <tr>
+                                <tr data-i18n-list-item="rangedheavy" class="hide-rangedheavy hide-skill-row">
                                     <td>
                                         <label data-i18n="rangedheavyag">Ranged - Heavy (Ag)</label>
                                     </td>
@@ -6538,14 +6870,14 @@
                         <table class="sheet-skills" cellspacing="0" cellpadding="0" border="0">
                             <thead>
                                 <tr>
-                                    <th data-i18n="magicskills">Magic Skills</th>
+                                    <th data-i18n="psychicpowers">Psychic Powers</th>
                                     <th class="sheet-npc-minion-title" title="Check to allow the skill to use the minion group size to determine proficiency and ability dice">Minion</th>
                                     <th colspan="2" data-i18n="rank">Rank</th>
                                     <th colspan="2" data-i18n="mods">Mods</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr data-i18n-list-item="arcana" class="hide-arcana hide-skill-row">
                                     <td>
                                         <label data-i18n="Arcanaint">Arcana (Int)</label>
                                     </td>
@@ -6553,7 +6885,7 @@
                                     <td><input type="number" name="attr_npc-rankArcana" max="6" min="0" value="0" /></td>
                                     <td>
                                         <input class="sheet-yd" type="hidden" name="attr_npc-yArcana" value="(((@{npc-intellect} + (@{npc-rankArcana} - (@{npc-rankArcana} * @{npc-minionskillArcana})) + ((@{npc-minion-group-size} - 1) * @{npc-minionskillArcana})) - abs(@{npc-intellect} - (@{npc-rankArcana} - (@{npc-rankArcana} * @{npc-minionskillArcana})) - ((@{npc-minion-group-size} - 1) * @{npc-minionskillArcana}))) / 2)" disabled><span></span>
-                                        <input class="sheet-gd" type="hidden" name="attr_npc-gArcana" value="((((@{npc-intellece} + (@{npc-rankArcana} - (@{npc-rankArcana} * @{npc-minionskillArcana})) + ((@{npc-minion-group-size} - 1) * @{npc-minionskillArcana})) + abs(@{npc-intellect} - (@{npc-rankArcana} - (@{npc-rankArcana} * @{npc-minionskillArcana})) - ((@{npc-minion-group-size} - 1) * @{npc-minionskillArcana}))) / 2) - @{npc-yArcana})" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_npc-gArcana" value="((((@{npc-intellect} + (@{npc-rankArcana} - (@{npc-rankArcana} * @{npc-minionskillArcana})) + ((@{npc-minion-group-size} - 1) * @{npc-minionskillArcana})) + abs(@{npc-intellect} - (@{npc-rankArcana} - (@{npc-rankArcana} * @{npc-minionskillArcana})) - ((@{npc-minion-group-size} - 1) * @{npc-minionskillArcana}))) / 2) - @{npc-yArcana})" disabled><span></span>
                                     </td>
                                     <td>
                                         <div class="sheet-dice-icon"></div>
@@ -6563,7 +6895,43 @@
                                     </td>
                                     <td><button type='roll' name='roll_Arcana' value='!eed characterID(@{character_id}) label(skill:Arcana) @{npc-diceArcana} encum(@{encumbrancemax}|@{encumbrance}) skill(@{npc-rankArcana}|@{npc-intellect}|@{npc-minion-group-size}|@{npc-minionskillArcana}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Arcana-->
-                                <tr>
+                                <tr data-i18n-list-item="biomancy" class="hide-biomancy hide-skill-row">
+                                    <td>
+                                        <label data-i18n="biomancybr">Biomancy (Br)</label>
+                                    </td>
+                                    <td><input name='attr_npc-minionskillBiomancy' type="checkbox" value="1"></td>
+                                    <td><input type="number" name="attr_npc-rankBiomancy" max="6" min="0" value="0" /></td>
+                                    <td>
+                                        <input class="sheet-yd" type="hidden" name="attr_npc-yBiomancy" value="(((@{npc-brawn} + (@{npc-rankBiomancy} - (@{npc-rankBiomancy} * @{npc-minionskillBiomancy})) + ((@{npc-minion-group-size} - 1) * @{npc-minionskillBiomancy})) - abs(@{npc-brawn} - (@{npc-rankBiomancy} - (@{npc-rankBiomancy} * @{npc-minionskillBiomancy})) - ((@{npc-minion-group-size} - 1) * @{npc-minionskillBiomancy}))) / 2)" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_npc-gBiomancy" value="((((@{npc-brawn} + (@{npc-rankBiomancy} - (@{npc-rankBiomancy} * @{npc-minionskillBiomancy})) + ((@{npc-minion-group-size} - 1) * @{npc-minionskillBiomancy})) + abs(@{npc-brawn} - (@{npc-rankBiomancy} - (@{npc-rankBiomancy} * @{npc-minionskillBiomancy})) - ((@{npc-minion-group-size} - 1) * @{npc-minionskillBiomancy}))) / 2) - @{npc-yBiomancy})" disabled><span></span>
+                                    </td>
+                                    <td>
+                                        <div class="sheet-dice-icon"></div>
+                                        <div class="sheet-dice-input">
+                                            <input type="text" name="attr_npc-diceBiomancy" />
+                                        </div>
+                                    </td>
+                                    <td><button type='roll' name='roll_Biomancy' value='!eed characterID(@{character_id}) label(skill:Biomancy) @{npc-diceBiomancy} skill(@{npc-rankBiomancy}|@{npc-brawn}|@{npc-minion-group-size}|@{npc-minionskillBiomancy}) @{dicePool} (gmdice)'></button></td>
+                                </tr><!--Biomancy - Psychic Power - Dark Heresy specific skill -->
+                                <tr data-i18n-list-item="divination" class="hide-divination hide-skill-row">
+                                    <td>
+                                        <label data-i18n="divinationcun">Divination (Cun)</label>
+                                    </td>
+                                    <td><input name='attr_npc-minionskillDivination' type="checkbox" value="1"></td>
+                                    <td><input type="number" name="attr_npc-rankDivination" max="6" min="0" value="0" /></td>
+                                    <td>
+                                        <input class="sheet-yd" type="hidden" name="attr_npc-yDivination" value="(((@{npc-cunning} + (@{npc-rankDivination} - (@{npc-rankDivination} * @{npc-minionskillDivination})) + ((@{npc-minion-group-size} - 1) * @{npc-minionskillDivination})) - abs(@{npc-cunning} - (@{npc-rankDivination} - (@{npc-rankDivination} * @{npc-minionskillDivination})) - ((@{npc-minion-group-size} - 1) * @{npc-minionskillDivination}))) / 2)" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_npc-gDivination" value="((((@{npc-cunning} + (@{npc-rankDivination} - (@{npc-rankDivination} * @{npc-minionskillDivination})) + ((@{npc-minion-group-size} - 1) * @{npc-minionskillDivination})) + abs(@{npc-cunning} - (@{npc-rankDivination} - (@{npc-rankDivination} * @{npc-minionskillDivination})) - ((@{npc-minion-group-size} - 1) * @{npc-minionskillDivination}))) / 2) - @{npc-yDivination})" disabled><span></span>
+                                    </td>
+                                    <td>
+                                        <div class="sheet-dice-icon"></div>
+                                        <div class="sheet-dice-input">
+                                            <input type="text" name="attr_npc-diceDivination" />
+                                        </div>
+                                    </td>
+                                    <td><button type='roll' name='roll_Divination' value='!eed characterID(@{character_id}) label(skill:Divination) @{npc-diceDivination} skill(@{npc-rankDivination}|@{npc-cunning}|@{npc-minion-group-size}|@{npc-minionskillDivination}) @{dicePool} (gmdice)'></button></td>
+                                </tr><!--Divination - Psychic Power - Dark Heresy specific skill -->
+                                <tr data-i18n-list-item="divine" class="hide-divine hide-skill-row">
                                     <td>
                                         <label data-i18n="divinewill">Divine (Will)</label>
                                     </td>
@@ -6581,7 +6949,7 @@
                                     </td>
                                     <td><button type='roll' name='roll_Divine' value='!eed characterID(@{character_id}) label(skill:Divine) @{npc-diceDivine} skill(@{npc-rankDivine}|@{npc-willpower}|@{npc-minion-group-size}|@{npc-minionskillDivine}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Divine-->
-                                <tr>
+                                <tr data-i18n-list-item="primal" class="hide-primal hide-skill-row">
                                     <td>
                                         <label data-i18n="primalcun">Primal (Cun)</label>
                                     </td>
@@ -6599,6 +6967,60 @@
                                     </td>
                                     <td><button type='roll' name='roll_Primal' value='!eed characterID(@{character_id}) label(skill:Primal) @{npc-dicePrimal} skill(@{npc-rankPrimal}|@{npc-cunning}|@{npc-minion-group-size}|@{npc-minionskillPrimal}) @{dicePool} (gmdice)'></button></td>
                                 </tr><!--Primal-->
+                                <tr data-i18n-list-item="pyromancy" class="hide-pyromancy hide-skill-row">
+                                    <td>
+                                        <label data-i18n="pyromancyag">Pyromancy (Ag)</label>
+                                    </td>
+                                    <td><input name='attr_npc-minionskillPyromancy' type="checkbox" value="1"></td>
+                                    <td><input type="number" name="attr_npc-rankPyromancy" max="6" min="0" value="0" /></td>
+                                    <td>
+                                        <input class="sheet-yd" type="hidden" name="attr_npc-yPyromancy" value="(((@{npc-agility} + (@{npc-rankPyromancy} - (@{npc-rankPyromancy} * @{npc-minionskillPyromancy})) + ((@{npc-minion-group-size} - 1) * @{npc-minionskillPyromancy})) - abs(@{npc-agility} - (@{npc-rankPyromancy} - (@{npc-rankPyromancy} * @{npc-minionskillPyromancy})) - ((@{npc-minion-group-size} - 1) * @{npc-minionskillPyromancy}))) / 2)" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_npc-gPyromancy" value="((((@{npc-agility} + (@{npc-rankPyromancy} - (@{npc-rankPyromancy} * @{npc-minionskillPyromancy})) + ((@{npc-minion-group-size} - 1) * @{npc-minionskillPyromancy})) + abs(@{npc-agility} - (@{npc-rankPyromancy} - (@{npc-rankPyromancy} * @{npc-minionskillPyromancy})) - ((@{npc-minion-group-size} - 1) * @{npc-minionskillPyromancy}))) / 2) - @{npc-yPyromancy})" disabled><span></span>
+                                    </td>
+                                    <td>
+                                        <div class="sheet-dice-icon"></div>
+                                        <div class="sheet-dice-input">
+                                            <input type="text" name="attr_npc-dicePyromancy" />
+                                        </div>
+                                    </td>
+                                    <td><button type='roll' name='roll_Pyromancy' value='!eed characterID(@{character_id}) label(skill:Pyromancy) @{npc-dicePyromancy} skill(@{npc-rankPyromancy}|@{npc-agility}|@{npc-minion-group-size}|@{npc-minionskillPyromancy}) @{dicePool} (gmdice)'></button></td>
+                                </tr><!--Pyromancy - Psychic Power - Dark Heresy specific skill -->
+                                <tr data-i18n-list-item="telekinesis" class="hide-telekinesis hide-skill-row">
+                                    <td>
+                                        <label data-i18n="telekinesisint">Telekinesis (Int)</label>
+                                    </td>
+                                    <td><input name='attr_npc-minionskillTelekinesis' type="checkbox" value="1"></td>
+                                    <td><input type="number" name="attr_npc-rankTelekinesis" max="6" min="0" value="0" /></td>
+                                    <td>
+                                        <input class="sheet-yd" type="hidden" name="attr_npc-yTelekinesis" value="(((@{npc-intellect} + (@{npc-rankTelekinesis} - (@{npc-rankTelekinesis} * @{npc-minionskillTelekinesis})) + ((@{npc-minion-group-size} - 1) * @{npc-minionskillTelekinesis})) - abs(@{npc-intellect} - (@{npc-rankTelekinesis} - (@{npc-rankTelekinesis} * @{npc-minionskillTelekinesis})) - ((@{npc-minion-group-size} - 1) * @{npc-minionskillTelekinesis}))) / 2)" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_npc-gTelekinesis" value="((((@{npc-intellect} + (@{npc-rankTelekinesis} - (@{npc-rankTelekinesis} * @{npc-minionskillTelekinesis})) + ((@{npc-minion-group-size} - 1) * @{npc-minionskillTelekinesis})) + abs(@{npc-intellect} - (@{npc-rankTelekinesis} - (@{npc-rankTelekinesis} * @{npc-minionskillTelekinesis})) - ((@{npc-minion-group-size} - 1) * @{npc-minionskillTelekinesis}))) / 2) - @{npc-yTelekinesis})" disabled><span></span>
+                                    </td>
+                                    <td>
+                                        <div class="sheet-dice-icon"></div>
+                                        <div class="sheet-dice-input">
+                                            <input type="text" name="attr_npc-diceTelekinesis" />
+                                        </div>
+                                    </td>
+                                    <td><button type='roll' name='roll_Telekinesis' value='!eed characterID(@{character_id}) label(skill:Telekinesis) @{npc-diceTelekinesis} skill(@{npc-rankTelekinesis}|@{npc-intellect}|@{npc-minion-group-size}|@{npc-minionskillTelekinesis}) @{dicePool} (gmdice)'></button></td>
+                                </tr><!--Telekinesis- Psychic Power - Dark Heresy specific skill -->
+                                <tr data-i18n-list-item="telepathy" class="hide-telepathy hide-skill-row">
+                                    <td>
+                                        <label data-i18n="telepathypr">Telepathy (Pr)</label>
+                                    </td>
+                                    <td><input name='attr_npc-minionskillTelepathy' type="checkbox" value="1"></td>
+                                    <td><input type="number" name="attr_npc-rankTelepathy" max="6" min="0" value="0" /></td>
+                                    <td>
+                                        <input class="sheet-yd" type="hidden" name="attr_npc-yTelepathy" value="(((@{npc-presence} + (@{npc-rankTelepathy} - (@{npc-rankTelepathy} * @{npc-minionskillTelepathy})) + ((@{npc-minion-group-size} - 1) * @{npc-minionskillTelepathy})) - abs(@{npc-presence} - (@{npc-rankTelepathy} - (@{npc-rankTelepathy} * @{npc-minionskillTelepathy})) - ((@{npc-minion-group-size} - 1) * @{npc-minionskillTelepathy}))) / 2)" disabled><span></span>
+                                        <input class="sheet-gd" type="hidden" name="attr_npc-gTelepathy" value="((((@{npc-presence} + (@{npc-rankTelepathy} - (@{npc-rankTelepathy} * @{npc-minionskillTelepathy})) + ((@{npc-minion-group-size} - 1) * @{npc-minionskillTelepathy})) + abs(@{npc-presence} - (@{npc-rankTelepathy} - (@{npc-rankTelepathy} * @{npc-minionskillTelepathy})) - ((@{npc-minion-group-size} - 1) * @{npc-minionskillTelepathy}))) / 2) - @{npc-yTelepathy})" disabled><span></span>
+                                    </td>
+                                    <td>
+                                        <div class="sheet-dice-icon"></div>
+                                        <div class="sheet-dice-input">
+                                            <input type="text" name="attr_npc-diceTelepathy" />
+                                        </div>
+                                    </td>
+                                    <td><button type='roll' name='roll_Telepathy' value='!eed characterID(@{character_id}) label(skill:Telepathy) @{npc-diceTelepathy} skill(@{npc-rankTelepathy}|@{npc-presence}|@{npc-minion-group-size}|@{npc-minionskillTelepathy}) @{dicePool} (gmdice)'></button></td>
+                                </tr><!--Telepathy- Psychic Power - Dark Heresy specific skill -->
                             </tbody>
                         </table><!--Magic Skills Section-->
                         <table class="sheet-skills sheet-custome-skills" cellspacing="0" cellpadding="0" border="0">
@@ -6814,8 +7236,13 @@
                                             <select name='attr_npc-MagicSkill'>
                                                 <optgroup label="Magic Skills" data-i18n-label="combatskills">
                                                     <option value="!eed characterID(@{character_id}) label(skill:Magic Power|Skill Name:Arcana|Power Name:@{npc-magicpowername}) skill(@{npc-rankArcana}|@{npc-intellect}|@{npc-minion-group-size}|@{npc-minionskillArcana}) @{dicePool} (gmdice)" data-i18n="Arcana">Arcana</option>
+                                                    <option value="!eed characterID(@{character_id}) label(skill:Magic Power|Skill Name:Biomancy|Power Name:@{npc-magicpowername}) skill(@{npc-rankBiomancy}|@{npc-brawn}|@{npc-minion-group-size}|@{npc-minionskillBiomancy}) @{dicePool} (gmdice)" data-i18n="biomancy">Biomancy</option>
+                                                    <option value="!eed characterID(@{character_id}) label(skill:Magic Power|Skill Name:Divination|Power Name:@{npc-magicpowername}) skill(@{npc-rankDivination}|@{npc-cunning}|@{npc-minion-group-size}|@{npc-minionskillDivination}) @{dicePool} (gmdice)" data-i18n="divination">Divination</option>
                                                     <option value="!eed characterID(@{character_id}) label(skill:Magic Power|Skill Name:Divine|Power Name:@{npc-magicpowername}) skill(@{npc-rankDivine}|@{npc-willpower}|@{npc-minion-group-size}|@{npc-minionskillDivine}) @{dicePool} (gmdice)" data-i18n="divine">Divine</option>
                                                     <option value="!eed characterID(@{character_id}) label(skill:Magic Power|Skill Name:Primal|Power Name:@{npc-magicpowername}) skill(@{npc-rankPrimal}|@{npc-cunning}|@{npc-minion-group-size}|@{npc-minionskillPrimal}) @{dicePool} (gmdice)" data-i18n="primal">Primal</option>
+                                                    <option value="!eed characterID(@{character_id}) label(skill:Magic Power|Skill Name:Pyromancy|Power Name:@{npc-magicpowername}) skill(@{npc-rankPyromancy}|@{npc-agility}|@{npc-minion-group-size}|@{npc-minionskillPyromancy}) @{dicePool} (gmdice)" data-i18n="pyromancy">Pyromancy</option>
+                                                    <option value="!eed characterID(@{character_id}) label(skill:Magic Power|Skill Name:Telekinesis|Power Name:@{npc-magicpowername}) skill(@{npc-rankTelekinesis}|@{npc-intellect}|@{npc-minion-group-size}|@{npc-minionskillTelekinesis}) @{dicePool} (gmdice)" data-i18n="telekinesis">Telekinesis</option>
+                                                    <option value="!eed characterID(@{character_id}) label(skill:Magic Power|Skill Name:Telepathy|Power Name:@{npc-magicpowername}) skill(@{npc-rankTelepathy}|@{npc-presence}|@{npc-minion-group-size}|@{npc-minionskillTelepathy}) @{dicePool} (gmdice)" data-i18n="telepathy">Telepathy</option>
                                                 </optgroup>
                                             </select>
                                         </td><!--Skill List-->
@@ -7900,7 +8327,7 @@
 <b data-i18n="needhelp">Need help?</b><input name="attr_Need-Help?" value="1" style="width: 96px; margin: -13px -20px 0 -80px;" class="sheet-toggle sheet-footer-toggle" type="checkbox" /><span></span>
 <div class="sheet-footer">
     <h4 data-i18n="needhelp">Need help?</h4>
-    <label data-i18n="visitwiki:">Visit the wiki:</label><input disabled="disabled" value="https://https://wiki.roll20.net/Genesys" type="text" /><br />
+    <label data-i18n="visitwiki:">Visit the wiki:</label><input disabled="disabled" value="https://wiki.roll20.net/Genesys" type="text" /><br />
     <label data-i18n="visitforum:">Visit the forum:</label><input disabled="disabled"
                                                                   value="https://app.roll20.net/forum/post/5930268/genesys-rpg-official-character-sheet-thread"
                                                                   type="text" />
