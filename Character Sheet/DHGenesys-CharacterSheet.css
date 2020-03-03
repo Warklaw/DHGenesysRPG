@@ -1677,7 +1677,7 @@ table.sheet-ship tr:hover td {
 }
 
 .sheet-planetary-vehicle-defense {
-    background: url('http://warklaw.fatcow.com/roll20/DHGenesysRPG/ship_four_zone.png') center center no-repeat; /* Land Vehicle Four Zones - Border */
+    background: url('http://warklaw.fatcow.com/roll20/DHGenesysRPG/land_four_zone.png') center center no-repeat; /* Land Vehicle Four Zones - Border */
     width: 302px;
     height: 236px;
     text-align: center;
