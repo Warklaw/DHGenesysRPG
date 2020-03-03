@@ -1164,6 +1164,47 @@ label.sheet-label-current {
     font-weight: bold;
 }
 
+/* ------------------------------------------------- Group Influence, Renown, Subtlety */
+
+.sheet-groupchar td:nth-child(3),
+.sheet-groupchar td:nth-child(5),
+.sheet-groupchar td:nth-child(7){
+    text-align: center;
+    background-image: url('http://warklaw.fatcow.com/roll20/DHGenesysRPG/dh_char.png'); /* Single Digit - Border */
+    background-position: center top;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    vertical-align: top;
+}
+
+.sheet-groupchar {
+    background-image: none;
+}
+
+.sheet-groupchar tr td {
+    border: none;
+}
+
+.sheet-groupchar tr:hover td {
+    background-color: transparent;
+}
+
+.sheet-groupchar label {
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    line-height: 15px;
+    padding-bottom: 4px;
+    font-size: 14px;
+    display: block;
+}
+
+.sheet-groupchar [type=number] {
+    font-size: 14px;
+    font-weight: bold;
+}
+
 /* Critical */
 
 .sheet-critical tr td {
