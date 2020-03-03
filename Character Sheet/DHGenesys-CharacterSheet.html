@@ -4168,7 +4168,27 @@
                                 <td colspan="5"><input type="text" name="attr_groupname" /></td>
                                 <td></td>
                             </tr>
-                            <tr>
+                            <tr class="sheet-groupchar">
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <label data-i18n="influence">Influence</label>
+                                    <input name='attr_influence' type="number" max="99" min="-50" value="0" class="characteristic" />
+                                </td>                               
+                                <td></td>
+                                <td>
+                                    <label data-i18n="renown">Renown</label>
+                                    <input name='attr_renown' type="number" max="99" min="0" value="0" class="characteristic" />
+                                </td>
+                                <td></td>
+                                <td>
+                                    <label data-i18n="subtlety">Subtlety</label>
+                                    <input name='attr_subtlety' type="number" max="10" min="0" value="5" class="characteristic" />
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="sheet-bg-grey">
                                 <td><label data-i18n="groupcredits:">Group Credits:</label></td>
                                 <td><input type="text" name="attr_groupcredits" disabled value='(@{grouppettycash} + @{groupsavings}) -@{groupexpenses}' /></td>
                                 <td><label data-i18n="pettycash:">Petty Cash:</label></td>
@@ -8126,6 +8146,26 @@
                                     <tr class="sheet-bg-grey">
                                         <td colspan="2"><label style="text-align:right" data-i18n="groupname:">Group Name:</label></td>
                                         <td colspan="5"><input type="text" name="attr_groupname" /></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="sheet-groupchar">
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <label data-i18n="influence">Influence</label>
+                                            <input name='attr_influence' type="number" max="99" min="-50" value="0" class="characteristic" />
+                                        </td>                               
+                                        <td></td>
+                                        <td>
+                                            <label data-i18n="renown">Renown</label>
+                                            <input name='attr_renown' type="number" max="99" min="0" value="0" class="characteristic" />
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <label data-i18n="subtlety">Subtlety</label>
+                                            <input name='attr_subtlety' type="number" max="10" min="0" value="5" class="characteristic" />
+                                        </td>
+                                        <td></td>
                                         <td></td>
                                     </tr>
                                     <tr>
